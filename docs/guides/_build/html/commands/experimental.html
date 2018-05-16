@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. Experimental Commands &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../index.html"/>
+        <link rel="up" title="SPP Commands" href="index.html"/>
+        <link rel="next" title="Tools" href="../tools/index.html"/>
+        <link rel="prev" title="3. Common Commands" href="common.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Setup Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SPP Commands</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="primary.html">1. Primary Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secondary.html">2. Secondary Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">3. Common Commands</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">4. Experimental Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#topo">4.1. topo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#output-to-terminal">4.1.1. Output to Terminal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-to-browser">4.1.2. Output to Browser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-to-file">4.1.3. Output to File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#topo-subgraph">4.2. topo_subgraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#topo-resize">4.3. topo_resize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-cmd">4.4. load_cmd</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spp_vf/index.html">SPP VF</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">SPP Commands</a> &raquo;</li>
+      
+    <li>4. Experimental Commands</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/commands/experimental.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experimental-commands">
+<h1>4. Experimental Commands<a class="headerlink" href="#experimental-commands" title="Permalink to this headline">¶</a></h1>
+<p>There are experimental commands in SPP controller.
+It might not work for some cases properly because it is not well tested
+currently.</p>
+<div class="section" id="topo">
+<h2>4.1. topo<a class="headerlink" href="#topo" title="Permalink to this headline">¶</a></h2>
+<p>Output network topology in several formats.
+Support four types of output.</p>
+<ul class="simple">
+<li>Terminal</li>
+<li>Browser (websocket server is required)</li>
+<li>Text (dot, json, yaml)</li>
+<li>Image file (jpg, png, bmp)</li>
+</ul>
+<p>This command uses <a class="reference external" href="https://www.graphviz.org/">graphviz</a>
+gfor generating topology file.
+You can also generate a dot formatted file or image files supported by
+graphviz.</p>
+<p>Here is a list of required tools for &#8216;topo&#8217;.
+MacOS is also supported optionally for which SPP controller
+runs on a remote host.</p>
+<ul class="simple">
+<li>graphviz</li>
+<li>imagemagick</li>
+<li>libsixel-bin (for Ubuntu) and terminal app supporting img2sixel</li>
+<li>iTerm2 and imgcat (for MacOS)</li>
+</ul>
+<div class="section" id="output-to-terminal">
+<h3>4.1.1. Output to Terminal<a class="headerlink" href="#output-to-terminal" title="Permalink to this headline">¶</a></h3>
+<p>Output an image of network configuration in terminal.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; topo term</span>
+</pre></div>
+</div>
+<p>There are few terminal applications to output image with <code class="docutils literal"><span class="pre">topo</span></code>.
+You can use mlterm, xterm or other terminals supported by <a class="reference external" href="https://github.com/saitoha/libsixel">img2sixel</a>.
+You can also use <a class="reference external" href="https://iterm2.com/index.html">iTerm2</a> on MacOS.
+If you use iTerm2, you have to get a shell script
+<code class="docutils literal"><span class="pre">imgcat</span></code> from <a class="reference external" href="https://iterm2.com/documentation-images.html">iTerm2&#8217;s displaying support site</a>
+and save this script as
+<code class="docutils literal"><span class="pre">spp/src/controller/3rd_party/imgcat.sh</span></code>.</p>
+<div class="figure" id="id1">
+<span id="figure-topo-term-exp"></span><a class="reference internal image-reference" href="../_images/topo_term_exp.svg"><img src="../_images/topo_term_exp.svg" width="440em" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.1 </span><span class="caption-text">topo term example</span></p>
+</div>
+</div>
+<div class="section" id="output-to-browser">
+<h3>4.1.2. Output to Browser<a class="headerlink" href="#output-to-browser" title="Permalink to this headline">¶</a></h3>
+<p>Output an image of network configuration in a browser.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; topo http</span>
+</pre></div>
+</div>
+<p>[TODO] Add explanation.</p>
+</div>
+<div class="section" id="output-to-file">
+<h3>4.1.3. Output to File<a class="headerlink" href="#output-to-file" title="Permalink to this headline">¶</a></h3>
+<p>Output a text or image of network configuration to a file.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; topo [FILE_NAME] [FILE_TYPE]</span>
+</pre></div>
+</div>
+<p>You do not need to specify <code class="docutils literal"><span class="pre">FILE_TYPE</span></code> because <code class="docutils literal"><span class="pre">topo</span></code> is able to
+decide file type from <code class="docutils literal"><span class="pre">FILE_NAME</span></code>. It is optional.
+This is a list of supported file type.</p>
+<ul class="simple">
+<li>dot</li>
+<li>js (or json)</li>
+<li>yml (or yaml)</li>
+<li>jpg</li>
+<li>png</li>
+<li>bmp</li>
+</ul>
+<p>To generate a DOT file <code class="docutils literal"><span class="pre">network.dot</span></code>, run <code class="docutils literal"><span class="pre">topo</span></code> command with
+file name.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> generate DOT file
+<span class="go">spp &gt; topo network.dot</span>
+<span class="go">Create topology: &#39;network.dot&#39;</span>
+<span class="gp">#</span> show contents of the file
+<span class="go">spp &gt; cat network.dot</span>
+<span class="go">digraph spp{</span>
+<span class="go">newrank=true;</span>
+<span class="go">node[shape=&quot;rectangle&quot;, style=&quot;filled&quot;];</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+<p>To generate a jpg image, run <code class="docutils literal"><span class="pre">topo</span></code> with the name <code class="docutils literal"><span class="pre">network.jpg</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; topo network.jpg</span>
+<span class="go">spp &gt; ls</span>
+<span class="go">...  network.jpg  ...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="topo-subgraph">
+<h2>4.2. topo_subgraph<a class="headerlink" href="#topo-subgraph" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">topo_subgraph</span></code> is a supplemental command for managing subgraphs
+for <code class="docutils literal"><span class="pre">topo</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; topo_subgraph [VERB] [LABEL] [RES_ID1,RES_ID2,...]</span>
+</pre></div>
+</div>
+<p>Each of options are:</p>
+<ul class="simple">
+<li>VERB: <code class="docutils literal"><span class="pre">add</span></code> or <code class="docutils literal"><span class="pre">del</span></code></li>
+<li>LABEL: Arbitrary text, such as <code class="docutils literal"><span class="pre">guest_vm1</span></code> or <code class="docutils literal"><span class="pre">container1</span></code></li>
+<li>RES_ID: Series of Resource ID consists of type and ID such as
+<code class="docutils literal"><span class="pre">vhost:1</span></code>. Each of resource IDs are separated with <code class="docutils literal"><span class="pre">,</span></code> or
+<code class="docutils literal"><span class="pre">;</span></code>.</li>
+</ul>
+<p>Subgraph is a group of object defined in dot language. Grouping objects
+helps your understanding relationship or hierarchy of each of objects.
+It is used for grouping resources on VM or container to be more
+understandable.</p>
+<p>For example, if you create two vhost interfaces for a guest VM and patch
+them to physical ports, <code class="docutils literal"><span class="pre">topo</span> <span class="pre">term</span></code> shows a network configuration as
+following.</p>
+<div class="figure" id="id2">
+<span id="figure-topo-subg-before"></span><a class="reference internal image-reference" href="../_images/topo_subg_before.svg"><img src="../_images/topo_subg_before.svg" width="440em" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.2 </span><span class="caption-text">Before using topo_subgraph</span></p>
+</div>
+<p>Two of vhost interfaces are placed outside of <code class="docutils literal"><span class="pre">Host</span></code> while the guest
+VM runs on <code class="docutils literal"><span class="pre">Host</span></code>.
+However, <code class="docutils literal"><span class="pre">vhost:1</span></code> and <code class="docutils literal"><span class="pre">vhost:2</span></code> should be placed inside <code class="docutils literal"><span class="pre">Host</span></code>
+actually. It is required to use subgraph!</p>
+<p>To include guest VM and its resources inside the <code class="docutils literal"><span class="pre">Host</span></code>,
+use <code class="docutils literal"><span class="pre">topo_subgraph</span></code> with options.
+In this case, add subgraph <code class="docutils literal"><span class="pre">guest_vm</span></code> and includes resoures
+<code class="docutils literal"><span class="pre">vhost:1</span></code> and <code class="docutils literal"><span class="pre">vhost:2</span></code> into the subgraph.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; topo_subgraph add guest_vm vhost:1,vhost:2</span>
+</pre></div>
+</div>
+<div class="figure" id="id3">
+<span id="figure-topo-subg-after"></span><a class="reference internal image-reference" href="../_images/topo_subg_after.svg"><img src="../_images/topo_subg_after.svg" width="440em" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.3 </span><span class="caption-text">After using topo_subgraph</span></p>
+</div>
+<p>All of registered subgraphs are listed by using <code class="docutils literal"><span class="pre">topo_subgraph</span></code>
+with no options.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; topo_subgraph</span>
+<span class="go">label: guest_vm subgraph: &quot;vhost:1,vhost:2&quot;</span>
+</pre></div>
+</div>
+<p>If guest VM is shut down and subgraph is not needed anymore,
+delete subgraph <code class="docutils literal"><span class="pre">guest_vm</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; topo_subgraph del guest_vm</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="topo-resize">
+<h2>4.3. topo_resize<a class="headerlink" href="#topo-resize" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">topo_resize</span></code> is a supplemental command for changing the size of
+images displayed on the terminal with <code class="docutils literal"><span class="pre">topo</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">topo</span></code> displays an image generated from graphviz with default size.
+However, it is too small or large for some environments because it
+depends on the resolution actually.</p>
+<p>To check default size, run <code class="docutils literal"><span class="pre">topo_resize</span></code> with no arguments.
+It shows current size of the image.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> shows current size
+<span class="go">spp &gt; topo_resize</span>
+<span class="go">60%</span>
+</pre></div>
+</div>
+<p>You can resize it with percentage</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> resize with percentage
+<span class="go">spp &gt; topo_resize 80%</span>
+<span class="go">80%</span>
+</pre></div>
+</div>
+<p>or ratio.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> resize with ratio
+<span class="go">spp &gt; topo_resize 0.8</span>
+<span class="go">80%</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-cmd">
+<h2>4.4. load_cmd<a class="headerlink" href="#load-cmd" title="Permalink to this headline">¶</a></h2>
+<p>Load command plugin dynamically while running SPP controller.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; load_cmd [CMD_NAME]</span>
+</pre></div>
+</div>
+<p>CLI of SPP controller is implemented with <code class="docutils literal"><span class="pre">Shell</span></code> class which is
+derived from Python standard library <code class="docutils literal"><span class="pre">Cmd</span></code>.
+It means that subcommands of SPP controller must be implemented as
+a member method named as <code class="docutils literal"><span class="pre">do_xxx</span></code>.
+For instance, <code class="docutils literal"><span class="pre">status</span></code> subcommand is implemented as <code class="docutils literal"><span class="pre">do_status</span></code>
+method.</p>
+<p><code class="docutils literal"><span class="pre">load_cmd</span></code> is for providing a way to define user specific command
+as a plugin.
+Plugin file must be placed in <code class="docutils literal"><span class="pre">spp/src/controller/command</span></code> and
+command name must be the same as file name.
+In addition, <code class="docutils literal"><span class="pre">do_xxx</span></code> method must be defined which is called from
+SPP controller.</p>
+<p>For example, <code class="docutils literal"><span class="pre">hello</span></code> sample plugin is defined as
+<code class="docutils literal"><span class="pre">spp/src/controller/command/hello.py</span></code> and <code class="docutils literal"><span class="pre">do_hello</span></code> is defined
+in this plugin.
+Comment for <code class="docutils literal"><span class="pre">do_hello</span></code> is used as help message for <code class="docutils literal"><span class="pre">hello</span></code> command.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">do_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Say hello to given user</span>
+
+<span class="sd">    spp &gt; hello alice</span>
+<span class="sd">    Hello, alice!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;name is required!&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hl</span> <span class="o">=</span> <span class="n">Hello</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">hl</span><span class="o">.</span><span class="n">say</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">hello</span></code> is loaded and called as following.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; load_cmd hello</span>
+<span class="go">Module &#39;command.hello&#39; loaded.</span>
+<span class="go">spp &gt; hello alice</span>
+<span class="go">Hello, alice!</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tools/index.html" class="btn btn-neutral float-right" title="Tools" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="common.html" class="btn btn-neutral" title="3. Common Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

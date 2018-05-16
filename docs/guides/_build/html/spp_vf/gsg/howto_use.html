@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.2. How to Use &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../../index.html"/>
+        <link rel="up" title="3. Getting Started" href="index.html"/>
+        <link rel="next" title="4. Use Cases" href="../use_cases/index.html"/>
+        <link rel="prev" title="3.1. Build" href="build.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands/index.html">SPP Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/index.html">Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SPP VF</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design.html">2. Design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">3. Getting Started</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="build.html">3.1. Build</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">3.2. How to Use</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#spp-controller">3.2.1. SPP Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spp-primary">3.2.2. SPP Primary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spp-secondary">3.2.3. SPP Secondary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vm">3.2.4. VM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/index.html">4. Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/index.html">5. SPP VF Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../explain/index.html">6. Explanation</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">SPP VF</a> &raquo;</li>
+      
+          <li><a href="index.html">3. Getting Started</a> &raquo;</li>
+      
+    <li>3.2. How to Use</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/spp_vf/gsg/howto_use.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-use">
+<span id="spp-vf-gsg-howto-use"></span><h1>3.2. How to Use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="spp-controller">
+<h2>3.2.1. SPP Controller<a class="headerlink" href="#spp-controller" title="Permalink to this headline">¶</a></h2>
+<p>First, run SPP Controller with port numbers for spp primary and secondary.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python ./src/spp_vf.py -p <span class="m">5555</span> -s 6666
+</pre></div>
+</div>
+</div>
+<div class="section" id="spp-primary">
+<h2>3.2.2. SPP Primary<a class="headerlink" href="#spp-primary" title="Permalink to this headline">¶</a></h2>
+<p>SPP primary allocates and manages resources for secondary processes.
+You need to run SPP primary before secondary processes.</p>
+<p>SPP primary has two kinds of options for DPDK and spp.
+Before <code class="docutils literal"><span class="pre">--</span></code> are for DPDK is, and after <code class="docutils literal"><span class="pre">--</span></code> are for spp.</p>
+<p>See <a class="reference external" href="http://dpdk.org/doc/guides/linux_gsg/build_sample_apps.html#running-a-sample-application">Running a Sample Application</a>
+in DPDK documentation for options.</p>
+<p>Options of spp primary are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>-p : port mask</li>
+<li>-n : number of rings</li>
+<li>-s : IPv4 address and port for spp primary</li>
+</ul>
+</div></blockquote>
+<p>Then, spp primary can be launched like this.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo ./src/primary/x86_64-native-linuxapp-gcc/spp_primary <span class="se">\</span>
+<span class="go">  -c 0x02 -n 4 --socket-mem 512,512 \</span>
+<span class="go">  --huge-dir=/run/hugepages/kvm \</span>
+<span class="go">  --proc-type=primary \</span>
+<span class="go">  -- -p 0x03 -n 9 -s 127.0.0.1:5555</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spp-secondary">
+<h2>3.2.3. SPP Secondary<a class="headerlink" href="#spp-secondary" title="Permalink to this headline">¶</a></h2>
+<p>spp secondary processes(<code class="docutils literal"><span class="pre">spp_vf</span></code>) can be launched with two kinds of
+options, like primary process.</p>
+<p>Like primary process, <code class="docutils literal"><span class="pre">spp_vf</span></code> has two kinds of options. One is for
+DPDK, the other is <code class="docutils literal"><span class="pre">spp_vf</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">spp_vf</span></code> specific options are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8211;client-id: client id</li>
+<li>-s: IPv4 address and port for spp secondary</li>
+<li>&#8211;vhost-client: vhost-user client enable setting</li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">spp_vf</span></code> can be launched like this.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo ./src/vf/x86_64-native-linuxapp-gcc/spp_vf <span class="se">\</span>
+<span class="go">-c 0x3ffd -n 4 --proc-type=secondary \</span>
+<span class="go">-- --client-id 1 -s 127.0.0.1:6666 --vhost-client</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal"><span class="pre">--vhost-client</span></code> option is specified, then <code class="docutils literal"><span class="pre">vhost-user</span></code> act as
+the client, otherwise the server.
+For reconnect feature from SPP to VM, <code class="docutils literal"><span class="pre">--vhost-client</span></code> option can be
+used. This reconnect features requires QEMU 2.7 (or later).
+See also <a class="reference external" href="http://dpdk.org/doc/guides/sample_app_ug/vhost.html">Vhost Sample Application</a>.</p>
+</div>
+<div class="section" id="vm">
+<h2>3.2.4. VM<a class="headerlink" href="#vm" title="Permalink to this headline">¶</a></h2>
+<p>Launch VMs with <code class="docutils literal"><span class="pre">virsh</span></code> command.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> virsh start <span class="o">[</span>VM<span class="o">]</span>
+</pre></div>
+</div>
+<div class="section" id="additional-network-configurations">
+<h3>3.2.4.1. Additional Network Configurations<a class="headerlink" href="#additional-network-configurations" title="Permalink to this headline">¶</a></h3>
+<p>To enable processes running on the VM to communicate through spp,
+it is required additional network configurations on host and guest VMs.</p>
+<ol class="arabic simple">
+<li>Guest VMs</li>
+</ol>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> Interface <span class="k">for</span> vhost
+<span class="gp">$</span> sudo ifconfig <span class="o">[</span>IF_NAME<span class="o">]</span> inet <span class="o">[</span>IP_ADDR<span class="o">]</span> netmask <span class="o">[</span>NETMASK<span class="o">]</span> up
+
+<span class="gp">#</span> Disable offload <span class="k">for</span> vhost interface
+<span class="gp">$</span> sudo ethtool -K <span class="o">[</span>IF_NAME<span class="o">]</span> tx off
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Host2</li>
+</ol>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> Disable offload <span class="k">for</span> VM interface
+<span class="gp">$</span> ethtool -K <span class="o">[</span>IF_NAME<span class="o">]</span> tx off
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../use_cases/index.html" class="btn btn-neutral float-right" title="4. Use Cases" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build.html" class="btn btn-neutral" title="3.1. Build" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

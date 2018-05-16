@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. Performance Optimization &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../index.html"/>
+        <link rel="up" title="Setup Guide" href="index.html"/>
+        <link rel="next" title="SPP Commands" href="../commands/index.html"/>
+        <link rel="prev" title="3. Use Cases" href="use_cases.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Setup Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto_use.html">2. How to Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use_cases.html">3. Use Cases</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">4. Performance Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reduce-context-switches">4.1. Reduce Context Switches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimizing-qemu-performance">4.2. Optimizing QEMU Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">4.3. Reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/index.html">SPP Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spp_vf/index.html">SPP VF</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Setup Guide</a> &raquo;</li>
+      
+    <li>4. Performance Optimization</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/setup/performance_opt.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="performance-optimization">
+<h1>4. Performance Optimization<a class="headerlink" href="#performance-optimization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="reduce-context-switches">
+<h2>4.1. Reduce Context Switches<a class="headerlink" href="#reduce-context-switches" title="Permalink to this headline">¶</a></h2>
+<p>Use the <code class="docutils literal"><span class="pre">isolcpus</span></code> Linux kernel parameter to isolate them
+from Linux scheduler to reduce context switches.
+It prevents workloads of other processes than DPDK running on
+reserved cores with <code class="docutils literal"><span class="pre">isolcpus</span></code> parameter.</p>
+<p>For Ubuntu 16.04, define <code class="docutils literal"><span class="pre">isolcpus</span></code> in <code class="docutils literal"><span class="pre">/etc/default/grub</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">GRUB_CMDLINE_LINUX_DEFAULT=“isolcpus=0-3,5,7”</span>
+</pre></div>
+</div>
+<p>The value of this <code class="docutils literal"><span class="pre">isolcpus</span></code> depends on your environment and usage.
+This example reserves six cores(0,1,2,3,5,7).</p>
+</div>
+<div class="section" id="optimizing-qemu-performance">
+<h2>4.2. Optimizing QEMU Performance<a class="headerlink" href="#optimizing-qemu-performance" title="Permalink to this headline">¶</a></h2>
+<p>QEMU process runs threads for vcpu emulation. It is effective strategy
+for pinning vcpu threads to decicated cores.</p>
+<p>To find vcpu threads, you use <code class="docutils literal"><span class="pre">ps</span></code> command to find PID of QEMU process
+and <code class="docutils literal"><span class="pre">pstree</span></code> command for threads launched from QEMU process.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> ps ea
+<span class="go">   PID TTY      STAT   TIME COMMAND</span>
+<span class="go">192606 pts/11   Sl+    4:42 ./x86_64-softmmu/qemu-system-x86_64 -cpu host ...</span>
+</pre></div>
+</div>
+<p>Run <code class="docutils literal"><span class="pre">pstree</span></code> with <code class="docutils literal"><span class="pre">-p</span></code> and this PID to find all threads launched from QEMU.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> pstree -p 192606
+<span class="go">qemu-system-x86(192606)--+--{qemu-system-x8}(192607)</span>
+<span class="go">                         |--{qemu-system-x8}(192623)</span>
+<span class="go">                         |--{qemu-system-x8}(192624)</span>
+<span class="go">                         |--{qemu-system-x8}(192625)</span>
+<span class="go">                         |--{qemu-system-x8}(192626)</span>
+</pre></div>
+</div>
+<p>Update affinity by using <code class="docutils literal"><span class="pre">taskset</span></code> command to pin vcpu threads.
+The vcpu threads is listed from the second entry and later.
+In this example, assign PID 192623 to core 4, PID 192624 to core 5
+and so on.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo taskset -pc <span class="m">4</span> 192623
+<span class="go">pid 192623&#39;s current affinity list: 0-31</span>
+<span class="go">pid 192623&#39;s new affinity list: 4</span>
+<span class="gp">$</span> sudo taskset -pc <span class="m">5</span> 192624
+<span class="go">pid 192624&#39;s current affinity list: 0-31</span>
+<span class="go">pid 192624&#39;s new affinity list: 5</span>
+<span class="gp">$</span> sudo taskset -pc <span class="m">6</span> 192625
+<span class="go">pid 192625&#39;s current affinity list: 0-31</span>
+<span class="go">pid 192625&#39;s new affinity list: 6</span>
+<span class="gp">$</span> sudo taskset -pc <span class="m">7</span> 192626
+<span class="go">pid 192626&#39;s current affinity list: 0-31</span>
+<span class="go">pid 192626&#39;s new affinity list: 7</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>4.3. Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>[1] <a class="reference external" href="https://www.redhat.com/archives/vfio-users/2017-February/msg00010.html">Best pinning strategy for latency/performance trade-off</a></li>
+<li>[2] <a class="reference external" href="http://dpdk.org/doc/guides/howto/pvp_reference_benchmark.html">PVP reference benchmark setup using testpmd</a></li>
+<li>[3] <a class="reference external" href="http://dpdk.org/doc/guides/linux_gsg/enable_func.html">Enabling Additional Functionality</a></li>
+<li>[4] <a class="reference external" href="http://dpdk.org/doc/guides/linux_gsg/nic_perf_intel_platform.html">How to get best performance with NICs on Intel platforms</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../commands/index.html" class="btn btn-neutral float-right" title="SPP Commands" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="use_cases.html" class="btn btn-neutral" title="3. Use Cases" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

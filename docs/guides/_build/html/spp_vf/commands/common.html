@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.3. Common Commands &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../../index.html"/>
+        <link rel="up" title="5. SPP VF Commands" href="index.html"/>
+        <link rel="next" title="6. Explanation" href="../explain/index.html"/>
+        <link rel="prev" title="5.2. Secondary Commands" href="secondary.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands/index.html">SPP Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/index.html">Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SPP VF</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design.html">2. Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gsg/index.html">3. Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/index.html">4. Use Cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">5. SPP VF Commands</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="primary.html">5.1. Primary Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="secondary.html">5.2. Secondary Commands</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">5.3. Common Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#status">5.3.1. status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#record">5.3.2. record</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#playback">5.3.3. playback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bye">5.3.4. bye</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#help">5.3.5. help</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../explain/index.html">6. Explanation</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">SPP VF</a> &raquo;</li>
+      
+          <li><a href="index.html">5. SPP VF Commands</a> &raquo;</li>
+      
+    <li>5.3. Common Commands</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/spp_vf/commands/common.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="common-commands">
+<span id="spp-vf-commands-spp-vf-common"></span><h1>5.3. Common Commands<a class="headerlink" href="#common-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="status">
+<h2>5.3.1. status<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<p>Show the number of connected primary and secondary processes.
+It also show a list of secondary IDs</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; status</span>
+<span class="go">Soft Patch Panel Status :</span>
+<span class="go">primary: 1</span>
+<span class="go">secondary count: 4</span>
+<span class="go">Connected secondary id: 1</span>
+<span class="go">Connected secondary id: 2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="record">
+<h2>5.3.2. record<a class="headerlink" href="#record" title="Permalink to this headline">¶</a></h2>
+<p>Start recording user&#8217;s input and create a history file for <code class="docutils literal"><span class="pre">playback</span></code>
+commnad.
+Recording is stopped by executing <code class="docutils literal"><span class="pre">exit</span></code> or <code class="docutils literal"><span class="pre">playback</span></code> command.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; record 2nfv_uni.config</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is not supported to stop recording without <code class="docutils literal"><span class="pre">exit</span></code> or <code class="docutils literal"><span class="pre">playback</span></code>
+command.
+It is planned to support <code class="docutils literal"><span class="pre">stop</span></code> command for stopping record in
+next relase.</p>
+</div>
+</div>
+<div class="section" id="playback">
+<h2>5.3.3. playback<a class="headerlink" href="#playback" title="Permalink to this headline">¶</a></h2>
+<p>Restore configuration from a config file.
+Content of config file is just a series of SPP commnad.
+You prepare a config file by using <code class="docutils literal"><span class="pre">record</span></code> command or editing a text
+file by hand.</p>
+<p>It is recommended to use extension <code class="docutils literal"><span class="pre">.config</span></code> to be self-sxplanatory
+as a config, although you can use any of extensions such as <code class="docutils literal"><span class="pre">.txt</span></code> or
+<code class="docutils literal"><span class="pre">.log</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp&gt; playback 2nfv_uni.config</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bye">
+<h2>5.3.4. bye<a class="headerlink" href="#bye" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">bye</span></code> command is for terminating SPP processes.
+It supports two types of termination as sub commands.</p>
+<blockquote>
+<div><ul class="simple">
+<li>sec</li>
+<li>all</li>
+</ul>
+</div></blockquote>
+<p>First one is for terminating only secondary processes at once.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; bye sec</span>
+<span class="go">closing:&lt;socket._socketobject object at 0x105750910&gt;</span>
+<span class="go">closing:&lt;socket._socketobject object at 0x105750a60&gt;</span>
+</pre></div>
+</div>
+<p>Second one is for all SPP processes other than controller.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; bye all</span>
+<span class="go">closing:&lt;socket._socketobject object at 0x10bd95910&gt;</span>
+<span class="go">closing:&lt;socket._socketobject object at 0x10bd95a60&gt;</span>
+<span class="go">closing:(&#39;127.0.0.1&#39;, 53620)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="help">
+<h2>5.3.5. help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h2>
+<p>Show help message for SPP commands.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; help</span>
+
+<span class="go">Documented commands (type help &lt;topic&gt;):</span>
+<span class="go">========================================</span>
+<span class="go">bye  help  playback  pri  record  sec  status</span>
+
+<span class="go">spp &gt; help status</span>
+<span class="go">Display Soft Patch Panel Status</span>
+<span class="go">spp &gt; help sec</span>
+<span class="go">Send command to secondary process</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../explain/index.html" class="btn btn-neutral float-right" title="6. Explanation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="secondary.html" class="btn btn-neutral" title="5.2. Secondary Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

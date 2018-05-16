@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.2. Secondary Commands &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../../index.html"/>
+        <link rel="up" title="5. SPP VF Commands" href="index.html"/>
+        <link rel="next" title="5.3. Common Commands" href="common.html"/>
+        <link rel="prev" title="5.1. Primary Commands" href="primary.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands/index.html">SPP Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/index.html">Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SPP VF</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design.html">2. Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gsg/index.html">3. Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/index.html">4. Use Cases</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">5. SPP VF Commands</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="primary.html">5.1. Primary Commands</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">5.2. Secondary Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#status">5.2.1. status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#component">5.2.2. component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#port">5.2.3. port</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classifier-table">5.2.4. classifier_table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flush">5.2.5. flush</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cancel">5.2.6. cancel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add">5.2.7. add</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#patch">5.2.8. patch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#forward">5.2.9. forward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stop">5.2.10. stop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#del">5.2.11. del</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exit">5.2.12. exit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="common.html">5.3. Common Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../explain/index.html">6. Explanation</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">SPP VF</a> &raquo;</li>
+      
+          <li><a href="index.html">5. SPP VF Commands</a> &raquo;</li>
+      
+    <li>5.2. Secondary Commands</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/spp_vf/commands/secondary.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="secondary-commands">
+<span id="spp-vf-commands-spp-vf-secondary"></span><h1>5.2. Secondary Commands<a class="headerlink" href="#secondary-commands" title="Permalink to this headline">¶</a></h1>
+<p>Each of secondary processes is managed with <code class="docutils literal"><span class="pre">sec</span></code> command.
+It is for sending sub commands to secondary with specific ID called
+secondary ID.</p>
+<p><code class="docutils literal"><span class="pre">sec</span></code> command takes an secondary ID and a sub command. They must be
+separated with delimiter <code class="docutils literal"><span class="pre">;</span></code>.
+Some of sub commands take additional arguments for speicfying resource
+owned by secondary process.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec [SEC_ID];[SUB_CMD]</span>
+</pre></div>
+</div>
+<div class="section" id="status">
+<h2>5.2.1. status<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<p>Show running status and resources.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;status</span>
+<span class="go">recv:7:{Client ID 1 Idling</span>
+<span class="go">1</span>
+<span class="go">port id: 0,on,PHY,outport: none</span>
+<span class="go">port id: 1,on,PHY,outport: none</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="component">
+<h2>5.2.2. component<a class="headerlink" href="#component" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This command is only supported for spp_vf.</p>
+</div>
+<p>Start or stop a component. SPP VF provides three types of components,
+<code class="docutils literal"><span class="pre">forwarder</span></code>, <code class="docutils literal"><span class="pre">classifier</span></code> and <code class="docutils literal"><span class="pre">merger</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">component</span> <span class="pre">start</span></code> command creates and starts a component with given
+options.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec [SEC_ID];component start [NAME] [CORE_ID] [DIRECTIVE]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">NAME</span></code> is used as an identifier of the component.</li>
+<li><code class="docutils literal"><span class="pre">DIRECTIVE</span></code> is a role of the component and corresponds to three types
+of components.<ul>
+<li>forward</li>
+<li>merge</li>
+<li>classifier_mac</li>
+</ul>
+</li>
+</ul>
+<p>This is an example for starting three types of components.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;component start forwarder1 2 forward</span>
+<span class="go">spp &gt; sec 1;component start merger1 3 merge</span>
+<span class="go">spp &gt; sec 1;component start classifier1 4 classifier_mac</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">component</span> <span class="pre">stop</span></code> command terminates a component with given options
+same as <code class="docutils literal"><span class="pre">component</span> <span class="pre">start</span></code> command..</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec [SEC_ID];component stop [NAME] [CORE_ID] [DIRECTIVE]</span>
+</pre></div>
+</div>
+<p>This is an example for stopping three types of components.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;component stop forwarder1 2 forward</span>
+<span class="go">spp &gt; sec 1;component stop merger1 3 merge</span>
+<span class="go">spp &gt; sec 1;component stop classifier1 4 classifier_mac</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="port">
+<h2>5.2.3. port<a class="headerlink" href="#port" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This command is only supported for spp_vf.</p>
+</div>
+<p>Add a port to a component or delete it from.
+SPP VF is able to treat VLAN tag by adding port with VLAN options.</p>
+<p><code class="docutils literal"><span class="pre">port</span> <span class="pre">add</span></code> command adds a port to a component with given options.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec [SEC_ID];port add [RES_ID] [PORT_TYPE] [NAME]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">RES_ID</span></code> is a resource ID and defined as a combination of resource
+type and number separated with delimiter <code class="docutils literal"><span class="pre">:</span></code>.
+There are three types of resources.<ul>
+<li><code class="docutils literal"><span class="pre">phy</span></code> for physical NIC</li>
+<li><code class="docutils literal"><span class="pre">vhost</span></code> for vhost PMD</li>
+<li><code class="docutils literal"><span class="pre">ring</span></code> for ring PMD</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">PORT_TYPE</span></code> is <code class="docutils literal"><span class="pre">rx</span></code> or <code class="docutils literal"><span class="pre">tx</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">NAME</span></code> is used as an identifier of the component.</li>
+</ul>
+<p>This is an example for adding port <code class="docutils literal"><span class="pre">phy:0</span></code> to <code class="docutils literal"><span class="pre">classifier1</span></code> as
+<code class="docutils literal"><span class="pre">rx</span></code> and to <code class="docutils literal"><span class="pre">merger1</span></code> as <code class="docutils literal"><span class="pre">tx</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;port add phy:0 rx classifier1</span>
+<span class="go">spp &gt; sec 1;port add phy:0 tx merger1</span>
+</pre></div>
+</div>
+<p>For VLAN support, you need to add options for <code class="docutils literal"><span class="pre">port</span> <span class="pre">add</span></code> command.
+To add VLAN tag, additional option <code class="docutils literal"><span class="pre">add_vlantag</span></code> with its options
+<code class="docutils literal"><span class="pre">VLAN_ID</span></code> and <code class="docutils literal"><span class="pre">PCP</span></code> are required.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec [SEC_ID];port add [RES_ID] [PORT_TYPE] [NAME] add_vlantag [VLAN_ID] [PCP]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">PCP</span></code> (Priority Code Point) is an attribute for priority defined in
+IEEE 802.1p standard. It is ranged from 0 to 7 and
+7 is the highest priority.</li>
+</ul>
+<p>Or to delete VLAN tag, <code class="docutils literal"><span class="pre">del_vlantag</span></code> option is required.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec [SEC_ID];port add [RES_ID] [PORT_TYPE] [NAME] del_vlantag</span>
+</pre></div>
+</div>
+<p>This is an example for adding a port with <code class="docutils literal"><span class="pre">add_vlantag</span></code> or
+<code class="docutils literal"><span class="pre">del_vlantag</span></code>.
+In this case, add rx port to append VLAN ID 101 with PCP 3 and
+tx port to append VLAN ID 102 with PCP3.</p>
+<ol class="arabic simple">
+<li>Add VLAN tag</li>
+</ol>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;port add phy:0 rx classifier1 add_vlantag 101 3</span>
+<span class="go">spp &gt; sec 1;port add phy:0 tx merger1 add_vlantag 102 3</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Delete VLAN tag</li>
+</ol>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;port add phy:0 rx classifier1 del_vlantag</span>
+<span class="go">spp &gt; sec 1;port add phy:0 tx merger1 del_vlantag</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">port</span> <span class="pre">del</span></code> command deletes a port from a component with given options
+same as <code class="docutils literal"><span class="pre">port</span> <span class="pre">add</span></code> command..</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec [SEC_ID];port del [RES_ID] [PORT_TYPE] [NAME]</span>
+</pre></div>
+</div>
+<p>This is an example for deleting port added in previous example.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;port del phy:0 rx classifier1</span>
+<span class="go">spp &gt; sec 1;port del phy:0 tx merger1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="classifier-table">
+<h2>5.2.4. classifier_table<a class="headerlink" href="#classifier-table" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This command is only supported for spp_vf.</p>
+</div>
+<p>Register an entry as a combination of MAC address and resource ID
+to classifier table.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec [SEC_ID];classifier_table add mac [MAC_ADDRESS] [RES_ID]</span>
+</pre></div>
+</div>
+<p>This is an example to register an entry for port <code class="docutils literal"><span class="pre">ring:0</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;classifier_table add mac 52:54:00:01:00:01 ring:0</span>
+</pre></div>
+</div>
+<p>Register an entry with a VLAN ID to classifier table.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;classifier_table add vlan [VLAN_ID] [MAC_ADDRESS] [RES_ID]</span>
+</pre></div>
+</div>
+<p>This is an example to register an entry with VLAN ID 101
+for port <code class="docutils literal"><span class="pre">ring:0</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 0;classifier_table add vlan 101 52:54:00:01:00:01 ring:0</span>
+</pre></div>
+</div>
+<p>Delete an entry.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;classifier_table add del [MAC_ADDRESS] [RES_ID]</span>
+</pre></div>
+</div>
+<p>This is an example to delete an entry for port <code class="docutils literal"><span class="pre">ring:0</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;classifier_table del mac 52:54:00:01:00:01 ring:0</span>
+</pre></div>
+</div>
+<p>Delete an entry with a VLAN ID.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;classifier_table del vlan [VLAN_ID] [MAC_ADDRESS] [RES_ID]</span>
+</pre></div>
+</div>
+<p>This is an example to delete an entry with VLAN ID 101.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 0;classifier_table del vlan 101 52:54:00:01:00:01 ring:0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="flush">
+<h2>5.2.5. flush<a class="headerlink" href="#flush" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This command is only supported for spp_vf.</p>
+</div>
+<p>Activate series of commands for a SPP VF secondary process
+(<code class="docutils literal"><span class="pre">component</span></code>, <code class="docutils literal"><span class="pre">port</span></code> or <code class="docutils literal"><span class="pre">classifier</span></code> command).</p>
+<p>You can cancel commands any time until
+before running <code class="docutils literal"><span class="pre">cancel</span></code> command.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;flush</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cancel">
+<h2>5.2.6. cancel<a class="headerlink" href="#cancel" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This command is only supported for spp_vf.</p>
+</div>
+<p>Cancel all of commands for a SPP VF secondary process
+before running <code class="docutils literal"><span class="pre">flush</span></code> command.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;cancel</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add">
+<h2>5.2.7. add<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h2>
+<p>Add a PMD to the secondary with resource ID.</p>
+<p>Adding ring 0 by</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp&gt; sec 1;add ring 0</span>
+<span class="go">recv:7:{addring0}</span>
+</pre></div>
+</div>
+<p>Or adding vhost 0 by</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp&gt; sec 1;add vhost 0</span>
+<span class="go">recv:7:{addvhost0}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="patch">
+<h2>5.2.8. patch<a class="headerlink" href="#patch" title="Permalink to this headline">¶</a></h2>
+<p>Create a path between two ports, source and destination ports.
+Port ID is referred by status sub commnad.
+This command just creates path and does not start forwarding.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;patch 0 2</span>
+<span class="go">recv:7:{patch02}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="forward">
+<h2>5.2.9. forward<a class="headerlink" href="#forward" title="Permalink to this headline">¶</a></h2>
+<p>Start forwarding.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;forward</span>
+<span class="go">recv:7:{start forwarding}</span>
+</pre></div>
+</div>
+<p>Running status is changed from <code class="docutils literal"><span class="pre">Idling</span></code> to <code class="docutils literal"><span class="pre">Running</span></code> by
+executing it.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;status</span>
+<span class="go">recv:7:{Client ID 1 Running</span>
+<span class="go">1</span>
+<span class="go">port id: 0,on,PHY,outport: none</span>
+<span class="go">port id: 1,on,PHY,outport: none</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stop">
+<h2>5.2.10. stop<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h2>
+<p>Stop forwarding.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;stop</span>
+<span class="go">recv:7:{start forwarding}</span>
+</pre></div>
+</div>
+<p>Running status is changed from <code class="docutils literal"><span class="pre">Running</span></code> to <code class="docutils literal"><span class="pre">Idling</span></code> by
+executing it.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;status</span>
+<span class="go">recv:7:{Client ID 1 Running</span>
+<span class="go">1</span>
+<span class="go">port id: 0,on,PHY,outport: none</span>
+<span class="go">port id: 1,on,PHY,outport: none</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="del">
+<h2>5.2.11. del<a class="headerlink" href="#del" title="Permalink to this headline">¶</a></h2>
+<p>Delete PMD added by <code class="docutils literal"><span class="pre">add</span></code> subcommand from the secondary.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp&gt; sec 1;del ring 0</span>
+<span class="go">recv:7:{delring0}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exit">
+<h2>5.2.12. exit<a class="headerlink" href="#exit" title="Permalink to this headline">¶</a></h2>
+<p>Terminate the secondary. For terminating all secondaries, use <code class="docutils literal"><span class="pre">bye</span> <span class="pre">sec</span></code>
+command instead of it.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp&gt; sec 1;exit</span>
+<span class="go">recv:7:{delring0}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="common.html" class="btn btn-neutral float-right" title="5.3. Common Commands" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="primary.html" class="btn btn-neutral" title="5.1. Primary Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

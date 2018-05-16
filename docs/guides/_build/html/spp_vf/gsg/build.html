@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.1. Build &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../../index.html"/>
+        <link rel="up" title="3. Getting Started" href="index.html"/>
+        <link rel="next" title="3.2. How to Use" href="howto_use.html"/>
+        <link rel="prev" title="3. Getting Started" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands/index.html">SPP Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/index.html">Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SPP VF</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design.html">2. Design</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">3. Getting Started</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">3.1. Build</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#environment">3.1.1. Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edit-config">3.1.2. Edit Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-dpdk">3.1.3. Install DPDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-spp">3.1.4. Install SPP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-for-dpdk">3.1.5. Setup for DPDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#virsh-setup">3.1.6. virsh setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trouble-shooting-guide">3.1.7. Trouble Shooting Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="howto_use.html">3.2. How to Use</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/index.html">4. Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/index.html">5. SPP VF Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../explain/index.html">6. Explanation</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">SPP VF</a> &raquo;</li>
+      
+          <li><a href="index.html">3. Getting Started</a> &raquo;</li>
+      
+    <li>3.1. Build</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/spp_vf/gsg/build.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="build">
+<span id="spp-vf-gsg-build"></span><h1>3.1. Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="environment">
+<h2>3.1.1. Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Ubuntu 16.04</li>
+<li>qemu-kvm 2.7 or later</li>
+<li>DPDK v17.11 or later</li>
+</ul>
+</div>
+<div class="section" id="edit-config">
+<h2>3.1.2. Edit Config<a class="headerlink" href="#edit-config" title="Permalink to this headline">¶</a></h2>
+<p>Uncomment user and group in <code class="docutils literal"><span class="pre">/etc/libvirt/qemu.conf</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> /etc/libvirt/qemu.conf
+
+<span class="go">user = &quot;root&quot;</span>
+<span class="go">group = &quot;root&quot;</span>
+</pre></div>
+</div>
+<p>Change <code class="docutils literal"><span class="pre">KVM_HUGEPAGES</span></code> from 0 to 1 in <code class="docutils literal"><span class="pre">/etc/default/qemu-kvm</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> /etc/default/qemu-kvm
+
+<span class="go">KVM_HUGEPAGES=1</span>
+</pre></div>
+</div>
+<p>Change grub config for hugepages and isolcpus.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cp"># /etc/default/grub</span>
+
+<span class="n">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&quot;isolcpus=2,4,6,8,10,12-18,20,22,24,26-42,44,46 hugepagesz=1G hugepages=36 default_hugepagesz=1G&quot;</span>
+</pre></div>
+</div>
+<p>For hugepages, isolcpus, refer to the dpdk documentation below.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://dpdk.org/doc/guides/linux_gsg/sys_reqs.html#running-dpdk-applications">Use of Hugepages in the Linux Environment</a></li>
+<li><a class="reference external" href="http://dpdk.org/doc/guides/linux_gsg/enable_func.html#using-linux-core-isolation-to-reduce-context-switches">Using Linux Core Isolation to Reduce Context Switches</a></li>
+<li><a class="reference external" href="http://dpdk.org/doc/guides/linux_gsg/nic_perf_intel_platform.html#linux-boot-command-line">Linux boot command line</a></li>
+</ul>
+<p>You need to run <code class="docutils literal"><span class="pre">update-grub</span></code> and reboot to activate grub config.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo upadte-grub
+<span class="gp">$</span> sudo reboot
+</pre></div>
+</div>
+<p>You can check hugepage settings as following.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> cat /proc/meminfo <span class="p">|</span> grep -i huge
+<span class="go">AnonHugePages:      2048 kB</span>
+<span class="go">HugePages_Total:      36            #       /etc/default/grub</span>
+<span class="go">HugePages_Free:       36</span>
+<span class="go">HugePages_Rsvd:        0</span>
+<span class="go">HugePages_Surp:        0</span>
+<span class="go">Hugepagesize:    1048576 kB         #       /etc/default/grub</span>
+
+<span class="gp">$</span> mount <span class="p">|</span> grep -i huge
+<span class="go">cgroup on /sys/fs/cgroup/hugetlb type cgroup (rw,nosuid,nodev,noexec,relatime,hugetlb,release_agent=/run/cgmanager/agents/cgm-release-agent.hugetlb,nsroot=/)</span>
+<span class="go">hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime)</span>
+<span class="go">hugetlbfs-kvm on /run/hugepages/kvm type hugetlbfs (rw,relatime,mode=775,gid=117)</span>
+<span class="go">hugetlb on /run/lxcfs/controllers/hugetlb type cgroup (rw,relatime,hugetlb,release_agent=/run/cgmanager/agents/cgm-release-agent.hugetlb,nsroot=/)</span>
+</pre></div>
+</div>
+<p>Finally, you unmount default hugepage.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo unmount /dev/hugepages
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-dpdk">
+<h2>3.1.3. Install DPDK<a class="headerlink" href="#install-dpdk" title="Permalink to this headline">¶</a></h2>
+<p>Install DPDK in any directory. This is a simple instruction and please
+refer
+<a class="reference external" href="http://dpdk.org/doc/guides/linux_gsg/index.html">Getting Started Guide for Linux</a>
+for details.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> /path/to/any_dir
+<span class="gp">$</span> git clone http://dpdk.org/git/dpdk
+<span class="gp">$</span> <span class="nb">cd</span> dpdk
+<span class="gp">$</span> git checkout <span class="o">[</span>TAG_NAME<span class="o">(</span>e.g. v17.05<span class="o">)]</span>
+<span class="gp">$</span> <span class="nb">export</span> <span class="nv">RTE_SDK</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>
+<span class="gp">$</span> <span class="nb">export</span> <span class="nv">RTE_TARGET</span><span class="o">=</span>x86_64-native-linuxapp-gcc
+<span class="gp">$</span> make <span class="nv">T</span><span class="o">=</span>x86_64-native-linuxapp-gcc install
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-spp">
+<h2>3.1.4. Install SPP<a class="headerlink" href="#install-spp" title="Permalink to this headline">¶</a></h2>
+<p>Clone SPP in any directory and compile it.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> /path/to/spp_home/
+<span class="gp">$</span> git clone https://github.com/ntt-ns/Soft-Patch-Panel.git
+<span class="go">export SPP_HOME=/path/to/spp_home/Soft-Patch-Panel</span>
+<span class="gp">$</span> <span class="nb">cd</span> $SPP_HOME
+<span class="gp">$</span> make
+</pre></div>
+</div>
+</div>
+<div class="section" id="setup-for-dpdk">
+<h2>3.1.5. Setup for DPDK<a class="headerlink" href="#setup-for-dpdk" title="Permalink to this headline">¶</a></h2>
+<p>Load igb_uio module.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo modprobe uio
+<span class="gp">$</span> sudo insmod $RTE_SDK/x86_64-native-linuxapp-gcc/kmod/igb_uio.ko
+<span class="gp">$</span> lsmod <span class="p">|</span> grep uio
+<span class="go">igb_uio                16384  0  # igb_uio is loaded</span>
+<span class="go">uio                    20480  1 igb_uio</span>
+</pre></div>
+</div>
+<p>Then, bind it with PCI_Number.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> $RTE_SDK/usertools/dpdk-devbind.py --status
+<span class="gp">#</span> check your device <span class="k">for</span> PCI_Number
+
+<span class="gp">$</span> sudo $RTE_SDK/usertools/dpdk-devbind.py --bind<span class="o">=</span>igb_uio <span class="o">[</span>PCI_Number<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="virsh-setup">
+<h2>3.1.6. virsh setup<a class="headerlink" href="#virsh-setup" title="Permalink to this headline">¶</a></h2>
+<p>Edit VM configuration with virsh.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> virsh edit <span class="o">[</span>VM_NAME<span class="o">]</span>
+</pre></div>
+</div>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;domain</span> <span class="na">type=</span><span class="s">&#39;kvm&#39;</span> <span class="na">xmlns:qemu=</span><span class="s">&#39;http://libvirt.org/schemas/domain/qemu/1.0&#39;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;name&gt;</span>spp-vm1<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;uuid&gt;</span>d90f5420-861a-4479-8559-62d7a1545cb9<span class="nt">&lt;/uuid&gt;</span>
+  <span class="nt">&lt;memory</span> <span class="na">unit=</span><span class="s">&#39;KiB&#39;</span><span class="nt">&gt;</span>4194304<span class="nt">&lt;/memory&gt;</span>
+  <span class="nt">&lt;currentMemory</span> <span class="na">unit=</span><span class="s">&#39;KiB&#39;</span><span class="nt">&gt;</span>4194304<span class="nt">&lt;/currentMemory&gt;</span>
+  <span class="nt">&lt;memoryBacking&gt;</span>
+    <span class="nt">&lt;hugepages/&gt;</span>
+  <span class="nt">&lt;/memoryBacking&gt;</span>
+  <span class="nt">&lt;vcpu</span> <span class="na">placement=</span><span class="s">&#39;static&#39;</span><span class="nt">&gt;</span>4<span class="nt">&lt;/vcpu&gt;</span>
+  <span class="nt">&lt;os&gt;</span>
+    <span class="nt">&lt;type</span> <span class="na">arch=</span><span class="s">&#39;x86_64&#39;</span> <span class="na">machine=</span><span class="s">&#39;pc-i440fx-2.3&#39;</span><span class="nt">&gt;</span>hvm<span class="nt">&lt;/type&gt;</span>
+    <span class="nt">&lt;boot</span> <span class="na">dev=</span><span class="s">&#39;hd&#39;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/os&gt;</span>
+  <span class="nt">&lt;features&gt;</span>
+    <span class="nt">&lt;acpi/&gt;</span>
+    <span class="nt">&lt;apic/&gt;</span>
+    <span class="nt">&lt;pae/&gt;</span>
+  <span class="nt">&lt;/features&gt;</span>
+  <span class="nt">&lt;clock</span> <span class="na">offset=</span><span class="s">&#39;utc&#39;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;on_poweroff&gt;</span>destroy<span class="nt">&lt;/on_poweroff&gt;</span>
+  <span class="nt">&lt;on_reboot&gt;</span>restart<span class="nt">&lt;/on_reboot&gt;</span>
+  <span class="nt">&lt;on_crash&gt;</span>restart<span class="nt">&lt;/on_crash&gt;</span>
+  <span class="nt">&lt;devices&gt;</span>
+    <span class="nt">&lt;emulator&gt;</span>/usr/local/bin/qemu-system-x86_64<span class="nt">&lt;/emulator&gt;</span>
+    <span class="nt">&lt;disk</span> <span class="na">type=</span><span class="s">&#39;file&#39;</span> <span class="na">device=</span><span class="s">&#39;disk&#39;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;driver</span> <span class="na">name=</span><span class="s">&#39;qemu&#39;</span> <span class="na">type=</span><span class="s">&#39;raw&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;source</span> <span class="na">file=</span><span class="s">&#39;/var/lib/libvirt/images/spp-vm1.qcow2&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;target</span> <span class="na">dev=</span><span class="s">&#39;hda&#39;</span> <span class="na">bus=</span><span class="s">&#39;ide&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;address</span> <span class="na">type=</span><span class="s">&#39;drive&#39;</span> <span class="na">controller=</span><span class="s">&#39;0&#39;</span> <span class="na">bus=</span><span class="s">&#39;0&#39;</span> <span class="na">target=</span><span class="s">&#39;0&#39;</span> <span class="na">unit=</span><span class="s">&#39;0&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/disk&gt;</span>
+    <span class="nt">&lt;disk</span> <span class="na">type=</span><span class="s">&#39;block&#39;</span> <span class="na">device=</span><span class="s">&#39;cdrom&#39;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;driver</span> <span class="na">name=</span><span class="s">&#39;qemu&#39;</span> <span class="na">type=</span><span class="s">&#39;raw&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;target</span> <span class="na">dev=</span><span class="s">&#39;hdc&#39;</span> <span class="na">bus=</span><span class="s">&#39;ide&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;readonly/&gt;</span>
+      <span class="nt">&lt;address</span> <span class="na">type=</span><span class="s">&#39;drive&#39;</span> <span class="na">controller=</span><span class="s">&#39;0&#39;</span> <span class="na">bus=</span><span class="s">&#39;1&#39;</span> <span class="na">target=</span><span class="s">&#39;0&#39;</span> <span class="na">unit=</span><span class="s">&#39;0&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/disk&gt;</span>
+    <span class="nt">&lt;controller</span> <span class="na">type=</span><span class="s">&#39;usb&#39;</span> <span class="na">index=</span><span class="s">&#39;0&#39;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;address</span> <span class="na">type=</span><span class="s">&#39;pci&#39;</span> <span class="na">domain=</span><span class="s">&#39;0x0000&#39;</span> <span class="na">bus=</span><span class="s">&#39;0x00&#39;</span> <span class="na">slot=</span><span class="s">&#39;0x01&#39;</span> <span class="na">function=</span><span class="s">&#39;0x2&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/controller&gt;</span>
+    <span class="nt">&lt;controller</span> <span class="na">type=</span><span class="s">&#39;pci&#39;</span> <span class="na">index=</span><span class="s">&#39;0&#39;</span> <span class="na">model=</span><span class="s">&#39;pci-root&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;controller</span> <span class="na">type=</span><span class="s">&#39;ide&#39;</span> <span class="na">index=</span><span class="s">&#39;0&#39;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;address</span> <span class="na">type=</span><span class="s">&#39;pci&#39;</span> <span class="na">domain=</span><span class="s">&#39;0x0000&#39;</span> <span class="na">bus=</span><span class="s">&#39;0x00&#39;</span> <span class="na">slot=</span><span class="s">&#39;0x01&#39;</span> <span class="na">function=</span><span class="s">&#39;0x1&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/controller&gt;</span>
+    <span class="nt">&lt;interface</span> <span class="na">type=</span><span class="s">&#39;network&#39;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;mac</span> <span class="na">address=</span><span class="s">&#39;52:54:00:99:aa:7f&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;source</span> <span class="na">network=</span><span class="s">&#39;default&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;model</span> <span class="na">type=</span><span class="s">&#39;rtl8139&#39;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;address</span> <span class="na">type=</span><span class="s">&#39;pci&#39;</span> <span class="na">domain=</span><span class="s">&#39;0x0000&#39;</span> <span class="na">bus=</span><span class="s">&#39;0x00&#39;</span> <span class="na">slot=</span><span class="s">&#39;0x02&#39;</span> <span class="na">function=</span><span class="s">&#39;0x0&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/interface&gt;</span>
+    <span class="nt">&lt;serial</span> <span class="na">type=</span><span class="s">&#39;pty&#39;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;target</span> <span class="na">type=</span><span class="s">&#39;isa-serial&#39;</span> <span class="na">port=</span><span class="s">&#39;0&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/serial&gt;</span>
+    <span class="nt">&lt;console</span> <span class="na">type=</span><span class="s">&#39;pty&#39;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;target</span> <span class="na">type=</span><span class="s">&#39;serial&#39;</span> <span class="na">port=</span><span class="s">&#39;0&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/console&gt;</span>
+    <span class="nt">&lt;memballoon</span> <span class="na">model=</span><span class="s">&#39;virtio&#39;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;address</span> <span class="na">type=</span><span class="s">&#39;pci&#39;</span> <span class="na">domain=</span><span class="s">&#39;0x0000&#39;</span> <span class="na">bus=</span><span class="s">&#39;0x00&#39;</span> <span class="na">slot=</span><span class="s">&#39;0x03&#39;</span> <span class="na">function=</span><span class="s">&#39;0x0&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/memballoon&gt;</span>
+  <span class="nt">&lt;/devices&gt;</span>
+  <span class="nt">&lt;qemu:commandline&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-cpu&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;host&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-object&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;memory-backend-file,id=mem,size=4096M,mem-path=/run/hugepages/kvm,share=on&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-numa&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;node,memdev=mem&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-mem-prealloc&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-chardev&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;socket,id=chr0,path=/tmp/sock0,server&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-device&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;virtio-net-pci,netdev=vhost-net0,mac=52:54:00:12:34:56&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-netdev&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;vhost-user,id=vhost-net0,chardev=chr0,vhostforce&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-chardev&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;socket,id=chr1,path=/tmp/sock1,server&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-device&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;virtio-net-pci,netdev=vhost-net1,mac=52:54:00:12:34:57&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;-netdev&#39;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;qemu:arg</span> <span class="na">value=</span><span class="s">&#39;vhost-user,id=vhost-net1,chardev=chr1,vhostforce&#39;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/qemu:commandline&gt;</span>
+<span class="nt">&lt;/domain&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="trouble-shooting-guide">
+<h2>3.1.7. Trouble Shooting Guide<a class="headerlink" href="#trouble-shooting-guide" title="Permalink to this headline">¶</a></h2>
+<p>You might encounter a permission error for <code class="docutils literal"><span class="pre">tmp/sockN</span></code> because
+of appamor.
+In this case, you should try it.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo ln -s /etc/apparmor.d/usr.lib.libvirt.virt-aa-helper /etc/apparmor.d/disable/usr.lib.libvirt.virt-aa-helper
+<span class="gp">$</span> sudo ln -s /etc/apparmor.d/usr.sbin.libvirtd /etc/apparmor.d/disable/usr.sbin.libvirtd
+<span class="gp">$</span> sudo apparmor_parser -R /etc/apparmor.d/usr.lib.libvirt.virt-aa-helper
+<span class="gp">$</span> sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.libvirtd
+<span class="gp">$</span> sudo service apparmor reload
+<span class="gp">$</span> sudo service apparmor restart
+<span class="gp">$</span> sudo service libvirt-bin restart
+</pre></div>
+</div>
+<p>Or, you remove appamor.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo apt-get remove apparmor
+</pre></div>
+</div>
+<p>If you use CentOS, not Ubuntu, confirm that SELinux doesn&#8217;t prevent
+for permission.
+SELinux should be disabled in this case.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> /etc/selinux/config
+<span class="go">SELINUX=disabled</span>
+</pre></div>
+</div>
+<p>Check your SELinux configuration.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> getenforce
+<span class="go">Disabled</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="howto_use.html" class="btn btn-neutral float-right" title="3.2. How to Use" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="3. Getting Started" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

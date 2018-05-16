@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6.1. Explanation &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../../index.html"/>
+        <link rel="up" title="6. Explanation" href="index.html"/>
+        <link rel="prev" title="6. Explanation" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commands/index.html">SPP Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/index.html">Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SPP VF</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design.html">2. Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gsg/index.html">3. Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use_cases/index.html">4. Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/index.html">5. SPP VF Commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">6. Explanation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">6.1. Explanation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initializing">6.1.1. Initializing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#main-function-of-slave-thread">6.1.2. Main function of slave thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-structure-of-classifier-table">6.1.3. Data structure of classifier table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packet-processing-in-classifier">6.1.4. Packet processing in classifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classifying-the-packets">6.1.5. Classifying the packets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packet-processing-in-forwarder-and-merger">6.1.6. Packet processing in forwarder and merger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#forward-and-merge-the-packets">6.1.7. Forward and merge the packets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#l2-multicast-support">6.1.8. L2 Multicast Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">SPP VF</a> &raquo;</li>
+      
+          <li><a href="index.html">6. Explanation</a> &raquo;</li>
+      
+    <li>6.1. Explanation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/spp_vf/explain/functions.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="explanation">
+<span id="spp-vf-explain-functions"></span><h1>6.1. Explanation<a class="headerlink" href="#explanation" title="Permalink to this headline">¶</a></h1>
+<p>The following sections provide some explanation of the code.</p>
+<div class="section" id="initializing">
+<h2>6.1.1. Initializing<a class="headerlink" href="#initializing" title="Permalink to this headline">¶</a></h2>
+<p>A manager thread of <code class="docutils literal"><span class="pre">spp_vf</span></code> initialize eal by <code class="docutils literal"><span class="pre">rte_eal_init()</span></code>.
+Then each of component threads are launched by
+<code class="docutils literal"><span class="pre">rte_eal_remote_launch()</span></code>.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/* spp_vf.c */</span>
+<span class="kt">int</span> <span class="n">ret_dpdk</span> <span class="o">=</span> <span class="n">rte_eal_init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+<span class="cm">/* Start worker threads of classifier and forwarder */</span>
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">lcore_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">RTE_LCORE_FOREACH_SLAVE</span><span class="p">(</span><span class="n">lcore_id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rte_eal_remote_launch</span><span class="p">(</span><span class="n">slave_main</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">lcore_id</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="main-function-of-slave-thread">
+<h2>6.1.2. Main function of slave thread<a class="headerlink" href="#main-function-of-slave-thread" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">slave_main()</span></code> is called from <code class="docutils literal"><span class="pre">rte_eal_remote_launch()</span></code>.
+It call <code class="docutils literal"><span class="pre">spp_classifier_mac_do()</span></code> or <code class="docutils literal"><span class="pre">spp_forward()</span></code> depending
+on the component command setting.
+<code class="docutils literal"><span class="pre">spp_classifier_mac_do()</span></code> provides function for classifier,
+and <code class="docutils literal"><span class="pre">spp_forward()</span></code> provides forwarder and merger.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/* spp_vf.c */</span>
+<span class="n">RTE_LOG</span><span class="p">(</span><span class="n">INFO</span><span class="p">,</span> <span class="n">APP</span><span class="p">,</span> <span class="s">&quot;Core[%d] Start.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lcore_id</span><span class="p">);</span>
+<span class="n">set_core_status</span><span class="p">(</span><span class="n">lcore_id</span><span class="p">,</span> <span class="n">SPP_CORE_IDLE</span><span class="p">);</span>
+
+<span class="k">while</span> <span class="p">((</span><span class="n">status</span> <span class="o">=</span> <span class="n">spp_get_core_status</span><span class="p">(</span><span class="n">lcore_id</span><span class="p">))</span> <span class="o">!=</span>
+        <span class="n">SPP_CORE_STOP_REQUEST</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="n">SPP_CORE_FORWARD</span><span class="p">)</span>
+                <span class="k">continue</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">spp_check_core_index</span><span class="p">(</span><span class="n">lcore_id</span><span class="p">))</span> <span class="p">{</span>
+                <span class="cm">/* Setting with the flush command trigger. */</span>
+                <span class="n">info</span><span class="o">-&gt;</span><span class="n">ref_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">upd_index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span>
+                        <span class="n">SPP_INFO_AREA_MAX</span><span class="p">;</span>
+                <span class="n">core</span> <span class="o">=</span> <span class="n">get_core_info</span><span class="p">(</span><span class="n">lcore_id</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">cnt</span> <span class="o">&lt;</span> <span class="n">core</span><span class="o">-&gt;</span><span class="n">num</span><span class="p">;</span> <span class="n">cnt</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">spp_get_component_type</span><span class="p">(</span><span class="n">lcore_id</span><span class="p">)</span> <span class="o">==</span>
+                                <span class="n">SPP_COMPONENT_CLASSIFIER_MAC</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="cm">/* Classifier loops inside the function. */</span>
+                        <span class="n">ret</span> <span class="o">=</span> <span class="n">spp_classifier_mac_do</span><span class="p">(</span><span class="n">core</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">[</span><span class="n">cnt</span><span class="p">]);</span>
+                        <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+
+                <span class="cm">/*</span>
+<span class="cm">                 * Forward / Merge returns at once.</span>
+<span class="cm">                 * It is for processing multiple components.</span>
+<span class="cm">                 */</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">spp_forward</span><span class="p">(</span><span class="n">core</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">[</span><span class="n">cnt</span><span class="p">]);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))</span>
+                        <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">RTE_LOG</span><span class="p">(</span><span class="n">ERR</span><span class="p">,</span> <span class="n">APP</span><span class="p">,</span>
+                        <span class="s">&quot;Core[%d] Component Error. (id = %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+                        <span class="n">lcore_id</span><span class="p">,</span> <span class="n">core</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">[</span><span class="n">cnt</span><span class="p">]);</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">set_core_status</span><span class="p">(</span><span class="n">lcore_id</span><span class="p">,</span> <span class="n">SPP_CORE_STOP</span><span class="p">);</span>
+<span class="n">RTE_LOG</span><span class="p">(</span><span class="n">INFO</span><span class="p">,</span> <span class="n">APP</span><span class="p">,</span> <span class="s">&quot;Core[%d] End.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lcore_id</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-structure-of-classifier-table">
+<h2>6.1.3. Data structure of classifier table<a class="headerlink" href="#data-structure-of-classifier-table" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">spp_classifier_mac_do()</span></code> lookup following data defined in
+<code class="docutils literal"><span class="pre">classifier_mac.c</span></code>,
+when it process the packets.
+Configuration of classifier is stored in the structure of
+<code class="docutils literal"><span class="pre">classified_data</span></code>, <code class="docutils literal"><span class="pre">classifier_mac_info</span></code> and
+<code class="docutils literal"><span class="pre">classifier_mac_mng_info</span></code>.
+The <code class="docutils literal"><span class="pre">classified_data</span></code> has member variables for expressing the port
+to be classified, <code class="docutils literal"><span class="pre">classifier_mac_info</span></code> has member variables
+for determining the direction of packets such as hash tables.
+Classifier manages two <code class="docutils literal"><span class="pre">classifier_mac_info</span></code>, one is for updating by
+commands, the other is for looking up to process packets.
+Then the <code class="docutils literal"><span class="pre">classifier_mac_mng_info</span></code> has
+two(<code class="docutils literal"><span class="pre">NUM_CLASSIFIER_MAC_INFO</span></code>) <code class="docutils literal"><span class="pre">classifier_mac_info</span></code>
+and index number for updating or reference.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/* classifier_mac.c */</span>
+<span class="cm">/* classified data (destination port, target packets, etc) */</span>
+<span class="k">struct</span> <span class="n">classified_data</span> <span class="p">{</span>
+        <span class="cm">/* interface type (see &quot;enum port_type&quot;) */</span>
+        <span class="k">enum</span> <span class="n">port_type</span>  <span class="n">iface_type</span><span class="p">;</span>
+
+        <span class="cm">/* index of ports handled by classifier */</span>
+        <span class="kt">int</span>             <span class="n">iface_no</span><span class="p">;</span>
+
+        <span class="cm">/* id for interface generated by spp_vf */</span>
+        <span class="kt">int</span>             <span class="n">iface_no_global</span><span class="p">;</span>
+
+        <span class="cm">/* port id generated by DPDK */</span>
+        <span class="kt">uint16_t</span>        <span class="n">port</span><span class="p">;</span>
+
+        <span class="cm">/* the number of packets in pkts[] */</span>
+        <span class="kt">uint16_t</span>        <span class="n">num_pkt</span><span class="p">;</span>
+
+        <span class="cm">/* packet array to be classified */</span>
+        <span class="k">struct</span> <span class="n">rte_mbuf</span> <span class="o">*</span><span class="n">pkts</span><span class="p">[</span><span class="n">MAX_PKT_BURST</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="cm">/* classifier information */</span>
+<span class="k">struct</span> <span class="n">classifier_mac_info</span> <span class="p">{</span>
+        <span class="cm">/* component name */</span>
+        <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="n">SPP_NAME_STR_LEN</span><span class="p">];</span>
+
+        <span class="cm">/* hash table keeps classifier_table */</span>
+        <span class="k">struct</span> <span class="n">rte_hash</span> <span class="o">*</span><span class="n">classifier_table</span><span class="p">;</span>
+
+        <span class="cm">/* number of valid classification */</span>
+        <span class="kt">int</span> <span class="n">num_active_classified</span><span class="p">;</span>
+
+        <span class="cm">/* index of valid classification */</span>
+        <span class="kt">int</span> <span class="n">active_classifieds</span><span class="p">[</span><span class="n">RTE_MAX_ETHPORTS</span><span class="p">];</span>
+
+        <span class="cm">/* index of default classification */</span>
+        <span class="kt">int</span> <span class="n">default_classified</span><span class="p">;</span>
+
+        <span class="cm">/* number of transmission ports */</span>
+        <span class="kt">int</span> <span class="n">n_classified_data_tx</span><span class="p">;</span>
+
+        <span class="cm">/* receive port handled by classifier */</span>
+        <span class="k">struct</span> <span class="n">classified_data</span> <span class="n">classified_data_rx</span><span class="p">;</span>
+
+        <span class="cm">/* transmission ports handled by classifier */</span>
+        <span class="k">struct</span> <span class="n">classified_data</span> <span class="n">classified_data_tx</span><span class="p">[</span><span class="n">RTE_MAX_ETHPORTS</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="cm">/* classifier management information */</span>
+<span class="k">struct</span> <span class="n">classifier_mac_mng_info</span> <span class="p">{</span>
+        <span class="cm">/* classifier information */</span>
+        <span class="k">struct</span> <span class="n">classifier_mac_info</span> <span class="n">info</span><span class="p">[</span><span class="n">NUM_CLASSIFIER_MAC_INFO</span><span class="p">];</span>
+
+        <span class="cm">/* Reference index number for classifier information */</span>
+        <span class="k">volatile</span> <span class="kt">int</span> <span class="n">ref_index</span><span class="p">;</span>
+
+        <span class="cm">/* Update index number for classifier information */</span>
+        <span class="k">volatile</span> <span class="kt">int</span> <span class="n">upd_index</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="packet-processing-in-classifier">
+<h2>6.1.4. Packet processing in classifier<a class="headerlink" href="#packet-processing-in-classifier" title="Permalink to this headline">¶</a></h2>
+<p>In <code class="docutils literal"><span class="pre">spp_classifier_mac_do()</span></code>, it receives packets from rx port and
+send them to destinations with <code class="docutils literal"><span class="pre">classify_packet()</span></code>.
+<code class="docutils literal"><span class="pre">classifier_info</span></code> is an argument of <code class="docutils literal"><span class="pre">classify_packet()</span></code> and is used
+to decide the destinations.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/* classifier_mac.c */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">likely</span><span class="p">(</span><span class="n">spp_get_core_status</span><span class="p">(</span><span class="n">lcore_id</span><span class="p">)</span> <span class="o">==</span> <span class="n">SPP_CORE_FORWARD</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                    <span class="n">likely</span><span class="p">(</span><span class="n">spp_check_core_index</span><span class="p">(</span><span class="n">lcore_id</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+            <span class="cm">/* change index of update side */</span>
+            <span class="n">change_update_index</span><span class="p">(</span><span class="n">classifier_mng_info</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span>
+
+            <span class="cm">/* decide classifier information of the current cycle */</span>
+            <span class="n">classifier_info</span> <span class="o">=</span> <span class="n">classifier_mng_info</span><span class="o">-&gt;</span><span class="n">info</span> <span class="o">+</span>
+                            <span class="n">classifier_mng_info</span><span class="o">-&gt;</span><span class="n">ref_index</span><span class="p">;</span>
+            <span class="n">classified_data_rx</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">classifier_info</span><span class="o">-&gt;</span><span class="n">classified_data_rx</span><span class="p">;</span>
+            <span class="n">classified_data_tx</span> <span class="o">=</span> <span class="n">classifier_info</span><span class="o">-&gt;</span><span class="n">classified_data_tx</span><span class="p">;</span>
+
+            <span class="cm">/* drain tx packets, if buffer is not filled for interval */</span>
+            <span class="n">cur_tsc</span> <span class="o">=</span> <span class="n">rte_rdtsc</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">cur_tsc</span> <span class="o">-</span> <span class="n">prev_tsc</span> <span class="o">&gt;</span> <span class="n">drain_tsc</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">classifier_info</span><span class="o">-&gt;</span><span class="n">n_classified_data_tx</span><span class="p">;</span>
+                                    <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="k">if</span> <span class="p">(</span><span class="n">likely</span><span class="p">(</span><span class="n">classified_data_tx</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">num_pkt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+                                    <span class="k">continue</span><span class="p">;</span>
+
+                            <span class="n">RTE_LOG</span><span class="p">(</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">SPP_CLASSIFIER_MAC</span><span class="p">,</span>
+                                            <span class="s">&quot;transmit packets (drain). &quot;</span>
+                                            <span class="s">&quot;index=%d, &quot;</span>
+                                            <span class="s">&quot;num_pkt=%hu, &quot;</span>
+                                            <span class="s">&quot;interval=%lu</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+                                            <span class="n">i</span><span class="p">,</span>
+                                            <span class="n">classified_data_tx</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">num_pkt</span><span class="p">,</span>
+                                            <span class="n">cur_tsc</span> <span class="o">-</span> <span class="n">prev_tsc</span><span class="p">);</span>
+                            <span class="n">transmit_packet</span><span class="p">(</span><span class="o">&amp;</span><span class="n">classified_data_tx</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                    <span class="p">}</span>
+                    <span class="n">prev_tsc</span> <span class="o">=</span> <span class="n">cur_tsc</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">classified_data_rx</span><span class="o">-&gt;</span><span class="n">iface_type</span> <span class="o">==</span> <span class="n">UNDEF</span><span class="p">)</span>
+                    <span class="k">continue</span><span class="p">;</span>
+
+            <span class="cm">/* retrieve packets */</span>
+            <span class="n">n_rx</span> <span class="o">=</span> <span class="n">rte_eth_rx_burst</span><span class="p">(</span><span class="n">classified_data_rx</span><span class="o">-&gt;</span><span class="n">port</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                            <span class="n">rx_pkts</span><span class="p">,</span> <span class="n">MAX_PKT_BURST</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">n_rx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+                    <span class="k">continue</span><span class="p">;</span>
+
+<span class="cp">#ifdef SPP_RINGLATENCYSTATS_ENABLE</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">classified_data_rx</span><span class="o">-&gt;</span><span class="n">iface_type</span> <span class="o">==</span> <span class="n">RING</span><span class="p">)</span>
+                        <span class="n">spp_ringlatencystats_calculate_latency</span><span class="p">(</span>
+                                        <span class="n">classified_data_rx</span><span class="o">-&gt;</span><span class="n">iface_no</span><span class="p">,</span>
+                                        <span class="n">rx_pkts</span><span class="p">,</span> <span class="n">n_rx</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+            <span class="cm">/* classify and transmit (filled) */</span>
+            <span class="n">classify_packet</span><span class="p">(</span><span class="n">rx_pkts</span><span class="p">,</span> <span class="n">n_rx</span><span class="p">,</span> <span class="n">classifier_info</span><span class="p">,</span>
+                            <span class="n">classified_data_tx</span><span class="p">);</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="classifying-the-packets">
+<h2>6.1.5. Classifying the packets<a class="headerlink" href="#classifying-the-packets" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">classify_packet()</span></code> uses hash function of DPDK to determine
+destination.
+Hash has MAC address as Key, it retrieves destination information
+from destination MAC address in the packet.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n_rx</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">eth</span> <span class="o">=</span> <span class="n">rte_pktmbuf_mtod</span><span class="p">(</span><span class="n">rx_pkts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="k">struct</span> <span class="n">ether_hdr</span> <span class="o">*</span><span class="p">);</span>
+
+        <span class="cm">/* find in table (by destination mac address)*/</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">rte_hash_lookup_data</span><span class="p">(</span><span class="n">classifier_info</span><span class="o">-&gt;</span><span class="n">classifier_table</span><span class="p">,</span>
+                        <span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">eth</span><span class="o">-&gt;</span><span class="n">d_addr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lookup_data</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="cm">/* L2 multicast(include broadcast) ? */</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">is_multicast_ether_addr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">eth</span><span class="o">-&gt;</span><span class="n">d_addr</span><span class="p">)))</span> <span class="p">{</span>
+                        <span class="n">RTE_LOG</span><span class="p">(</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">SPP_CLASSIFIER_MAC</span><span class="p">,</span>
+                                        <span class="s">&quot;multicast mac address.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                        <span class="n">handle_l2multicast_packet</span><span class="p">(</span><span class="n">rx_pkts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                        <span class="n">classifier_info</span><span class="p">,</span>
+                                        <span class="n">classified_data</span><span class="p">);</span>
+                        <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span>
+
+                <span class="cm">/* if no default, drop packet */</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">classifier_info</span><span class="o">-&gt;</span><span class="n">default_classified</span> <span class="o">==</span>
+                                <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="n">ether_format_addr</span><span class="p">(</span><span class="n">mac_addr_str</span><span class="p">,</span>
+                                        <span class="k">sizeof</span><span class="p">(</span><span class="n">mac_addr_str</span><span class="p">),</span>
+                                        <span class="o">&amp;</span><span class="n">eth</span><span class="o">-&gt;</span><span class="n">d_addr</span><span class="p">);</span>
+                        <span class="n">RTE_LOG</span><span class="p">(</span><span class="n">ERR</span><span class="p">,</span> <span class="n">SPP_CLASSIFIER_MAC</span><span class="p">,</span>
+                                        <span class="s">&quot;unknown mac address. &quot;</span>
+                                        <span class="s">&quot;ret=%d, mac_addr=%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+                                        <span class="n">ret</span><span class="p">,</span> <span class="n">mac_addr_str</span><span class="p">);</span>
+                        <span class="n">rte_pktmbuf_free</span><span class="p">(</span><span class="n">rx_pkts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                        <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span>
+
+                <span class="cm">/* to default classified */</span>
+                <span class="n">RTE_LOG</span><span class="p">(</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">SPP_CLASSIFIER_MAC</span><span class="p">,</span>
+                                <span class="s">&quot;to default classified.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="n">lookup_data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)(</span><span class="kt">long</span><span class="p">)</span><span class="n">classifier_info</span><span class="o">-&gt;</span>
+                                <span class="n">default_classified</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * set mbuf pointer to tx buffer</span>
+<span class="cm">         * and transmit packet, if buffer is filled</span>
+<span class="cm">         */</span>
+        <span class="n">push_packet</span><span class="p">(</span><span class="n">rx_pkts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">classified_data</span> <span class="o">+</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">lookup_data</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="packet-processing-in-forwarder-and-merger">
+<h2>6.1.6. Packet processing in forwarder and merger<a class="headerlink" href="#packet-processing-in-forwarder-and-merger" title="Permalink to this headline">¶</a></h2>
+<p>Configuration data for forwarder and merger is stored as structured
+tables <code class="docutils literal"><span class="pre">forward_rxtx</span></code>, <code class="docutils literal"><span class="pre">forward_path</span></code> and <code class="docutils literal"><span class="pre">forward_info</span></code>.
+The <code class="docutils literal"><span class="pre">forward_rxtx</span></code> has two member variables for expressing the port
+to be sent(tx) and to be receive(rx),
+<code class="docutils literal"><span class="pre">forward_path</span></code> has member variables for expressing the data path.
+Like <code class="docutils literal"><span class="pre">classifier_mac_info</span></code>, <code class="docutils literal"><span class="pre">forward_info</span></code> has two tables,
+one is for updating by commands, the other is for looking up to process
+packets.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/* spp_forward.c */</span>
+<span class="cm">/* A set of port info of rx and tx */</span>
+<span class="k">struct</span> <span class="n">forward_rxtx</span> <span class="p">{</span>
+        <span class="k">struct</span> <span class="n">spp_port_info</span> <span class="n">rx</span><span class="p">;</span> <span class="cm">/* rx port */</span>
+        <span class="k">struct</span> <span class="n">spp_port_info</span> <span class="n">tx</span><span class="p">;</span> <span class="cm">/* tx port */</span>
+<span class="p">};</span>
+
+<span class="cm">/* Information on the path used for forward. */</span>
+<span class="k">struct</span> <span class="n">forward_path</span> <span class="p">{</span>
+        <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="n">SPP_NAME_STR_LEN</span><span class="p">];</span>    <span class="cm">/* component name */</span>
+        <span class="k">volatile</span> <span class="k">enum</span> <span class="n">spp_component_type</span> <span class="n">type</span><span class="p">;</span>
+                                        <span class="cm">/* component type */</span>
+        <span class="kt">int</span> <span class="n">num</span><span class="p">;</span>  <span class="cm">/* number of receive ports */</span>
+        <span class="k">struct</span> <span class="n">forward_rxtx</span> <span class="n">ports</span><span class="p">[</span><span class="n">RTE_MAX_ETHPORTS</span><span class="p">];</span>
+                                        <span class="cm">/* port used for transfer */</span>
+<span class="p">};</span>
+
+<span class="cm">/* Information for forward. */</span>
+<span class="k">struct</span> <span class="n">forward_info</span> <span class="p">{</span>
+        <span class="k">volatile</span> <span class="kt">int</span> <span class="n">ref_index</span><span class="p">;</span> <span class="cm">/* index to reference area */</span>
+        <span class="k">volatile</span> <span class="kt">int</span> <span class="n">upd_index</span><span class="p">;</span> <span class="cm">/* index to update area    */</span>
+        <span class="k">struct</span> <span class="n">forward_path</span> <span class="n">path</span><span class="p">[</span><span class="n">SPP_INFO_AREA_MAX</span><span class="p">];</span>
+                                <span class="cm">/* Information of data path */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="forward-and-merge-the-packets">
+<h2>6.1.7. Forward and merge the packets<a class="headerlink" href="#forward-and-merge-the-packets" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">spp_forward()</span></code> defined in <code class="docutils literal"><span class="pre">spp_forward.c</span></code> is a main function
+for both forwarder and merger.
+<code class="docutils literal"><span class="pre">spp_forward()</span></code> simply passes packet received from rx port to
+tx port of the pair.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/* spp_forward.c */</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">cnt</span> <span class="o">&lt;</span> <span class="n">num</span><span class="p">;</span> <span class="n">cnt</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rx</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">path</span><span class="o">-&gt;</span><span class="n">ports</span><span class="p">[</span><span class="n">cnt</span><span class="p">].</span><span class="n">rx</span><span class="p">;</span>
+                <span class="n">tx</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">path</span><span class="o">-&gt;</span><span class="n">ports</span><span class="p">[</span><span class="n">cnt</span><span class="p">].</span><span class="n">tx</span><span class="p">;</span>
+
+                <span class="cm">/* Receive packets */</span>
+                <span class="n">nb_rx</span> <span class="o">=</span> <span class="n">rte_eth_rx_burst</span><span class="p">(</span>
+                        <span class="n">rx</span><span class="o">-&gt;</span><span class="n">dpdk_port</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">bufs</span><span class="p">,</span> <span class="n">MAX_PKT_BURST</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">nb_rx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+                        <span class="k">continue</span><span class="p">;</span>
+
+<span class="cp">#ifdef SPP_RINGLATENCYSTATS_ENABLE</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">rx</span><span class="o">-&gt;</span><span class="n">iface_type</span> <span class="o">==</span> <span class="n">RING</span><span class="p">)</span>
+                        <span class="n">spp_ringlatencystats_calculate_latency</span><span class="p">(</span>
+                                        <span class="n">rx</span><span class="o">-&gt;</span><span class="n">iface_no</span><span class="p">,</span>
+                                        <span class="n">bufs</span><span class="p">,</span> <span class="n">nb_rx</span><span class="p">);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">tx</span><span class="o">-&gt;</span><span class="n">iface_type</span> <span class="o">==</span> <span class="n">RING</span><span class="p">)</span>
+                        <span class="n">spp_ringlatencystats_add_time_stamp</span><span class="p">(</span>
+                                        <span class="n">tx</span><span class="o">-&gt;</span><span class="n">iface_no</span><span class="p">,</span>
+                                        <span class="n">bufs</span><span class="p">,</span> <span class="n">nb_rx</span><span class="p">);</span>
+<span class="cp">#endif </span><span class="cm">/* SPP_RINGLATENCYSTATS_ENABLE */</span><span class="cp"></span>
+
+                <span class="cm">/* Send packets */</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">tx</span><span class="o">-&gt;</span><span class="n">dpdk_port</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">nb_tx</span> <span class="o">=</span> <span class="n">rte_eth_tx_burst</span><span class="p">(</span>
+                                <span class="n">tx</span><span class="o">-&gt;</span><span class="n">dpdk_port</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">bufs</span><span class="p">,</span> <span class="n">nb_rx</span><span class="p">);</span>
+
+                <span class="cm">/* Discard remained packets to release mbuf */</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">nb_tx</span> <span class="o">&lt;</span> <span class="n">nb_rx</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="k">for</span> <span class="p">(</span><span class="n">buf</span> <span class="o">=</span> <span class="n">nb_tx</span><span class="p">;</span> <span class="n">buf</span> <span class="o">&lt;</span> <span class="n">nb_rx</span><span class="p">;</span> <span class="n">buf</span><span class="o">++</span><span class="p">)</span>
+                                <span class="n">rte_pktmbuf_free</span><span class="p">(</span><span class="n">bufs</span><span class="p">[</span><span class="n">buf</span><span class="p">]);</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="l2-multicast-support">
+<h2>6.1.8. L2 Multicast Support<a class="headerlink" href="#l2-multicast-support" title="Permalink to this headline">¶</a></h2>
+<p>SPP_VF also supports multicast for resolving ARP requests.
+It is implemented as <code class="docutils literal"><span class="pre">handle_l2multicast_packet()</span></code> and called from
+<code class="docutils literal"><span class="pre">classify_packet()</span></code> for incoming multicast packets.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/* classify_packet() in classifier_mac.c */</span>
+             <span class="cm">/* L2 multicast(include broadcast) ? */</span>
+             <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">is_multicast_ether_addr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">eth</span><span class="o">-&gt;</span><span class="n">d_addr</span><span class="p">)))</span> <span class="p">{</span>
+                     <span class="n">RTE_LOG</span><span class="p">(</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">SPP_CLASSIFIER_MAC</span><span class="p">,</span>
+                                     <span class="s">&quot;multicast mac address.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                     <span class="n">handle_l2multicast_packet</span><span class="p">(</span><span class="n">rx_pkts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                     <span class="n">classifier_info</span><span class="p">,</span>
+                                     <span class="n">classified_data</span><span class="p">);</span>
+                     <span class="k">continue</span><span class="p">;</span>
+             <span class="p">}</span>
+</pre></div>
+</div>
+<p>For distributing multicast packet, it is cloned with
+<code class="docutils literal"><span class="pre">rte_mbuf_refcnt_update()</span></code>.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/* classifier_mac.c */</span>
+<span class="cm">/* handle L2 multicast(include broadcast) packet */</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span>
+<span class="nf">handle_l2multicast_packet</span><span class="p">(</span><span class="k">struct</span> <span class="n">rte_mbuf</span> <span class="o">*</span><span class="n">pkt</span><span class="p">,</span>
+                <span class="k">struct</span> <span class="n">classifier_mac_info</span> <span class="o">*</span><span class="n">classifier_info</span><span class="p">,</span>
+                <span class="k">struct</span> <span class="n">classified_data</span> <span class="o">*</span><span class="n">classified_data</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">classifier_info</span><span class="o">-&gt;</span><span class="n">num_active_classified</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">RTE_LOG</span><span class="p">(</span><span class="n">ERR</span><span class="p">,</span>
+                        <span class="n">SPP_CLASSIFIER_MAC</span><span class="p">,</span>
+                        <span class="s">&quot;No mac address.(l2 multicast packet)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                <span class="n">rte_pktmbuf_free</span><span class="p">(</span><span class="n">pkt</span><span class="p">);</span>
+                <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">rte_mbuf_refcnt_update</span><span class="p">(</span><span class="n">pkt</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">classifier_info</span><span class="o">-&gt;</span><span class="n">num_active_classified</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">classifier_info</span><span class="o">-&gt;</span><span class="n">num_active_classified</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">push_packet</span><span class="p">(</span><span class="n">pkt</span><span class="p">,</span> <span class="n">classified_data</span> <span class="o">+</span>
+                        <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">classifier_info</span><span class="o">-&gt;</span><span class="n">active_classifieds</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="6. Explanation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

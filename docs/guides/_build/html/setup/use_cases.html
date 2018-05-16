@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Use Cases &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../index.html"/>
+        <link rel="up" title="Setup Guide" href="index.html"/>
+        <link rel="next" title="4. Performance Optimization" href="performance_opt.html"/>
+        <link rel="prev" title="2. How to Use" href="howto_use.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Setup Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">1. Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto_use.html">2. How to Use</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">3. Use Cases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#single-spp-nfv">3.1. Single spp_nfv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configure-spp-nfv-as-l2fwd">3.1.1. Configure spp_nfv as L2fwd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-spp-nfv-for-loopback">3.1.2. Configure spp_nfv for Loopback</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dual-spp-nfv">3.2. Dual spp_nfv</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configure-two-spp-nfv-as-l2fwd">3.2.1. Configure Two spp_nfv as L2fwd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-two-spp-nfv-for-loopback">3.2.2. Configure two spp_nfv for Loopback</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dual-spp-nfv-with-ring-pmd">3.3. Dual spp_nfv with Ring PMD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ring-pmd">3.3.1. Ring PMD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uni-directional-l2fwd">3.3.2. Uni-Directional L2fwd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bi-directional-l2fwd">3.3.3. Bi-Directional L2fwd</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#single-spp-nfv-with-vhost-pmd">3.4. Single spp_nfv with Vhost PMD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vhost-pmd">3.4.1. Vhost PMD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-vhost-pmd">3.4.2. Setup Vhost PMD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uni-directional-l2fwd-with-vhost-pmd">3.4.3. Uni-Directional L2fwd with Vhost PMD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="performance_opt.html">4. Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/index.html">SPP Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spp_vf/index.html">SPP VF</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Setup Guide</a> &raquo;</li>
+      
+    <li>3. Use Cases</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/setup/use_cases.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="use-cases">
+<h1>3. Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="single-spp-nfv">
+<span id="id1"></span><h2>3.1. Single spp_nfv<a class="headerlink" href="#single-spp-nfv" title="Permalink to this headline">¶</a></h2>
+<p>The most simple use case mainly for testing performance of packet
+forwarding on host.
+One <code class="docutils literal"><span class="pre">spp_nfv</span></code> and two physical ports.</p>
+<p>In this use case, try to configure two senarios.</p>
+<ul class="simple">
+<li>Configure spp_nfv as L2fwd</li>
+<li>Configure spp_nfv for Loopback</li>
+</ul>
+<p>First of all, Check the status of <code class="docutils literal"><span class="pre">spp_nfv</span></code> from SPP controller.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;status</span>
+<span class="go">status: idling</span>
+<span class="go">ports:</span>
+<span class="go">  - &#39;phy:0&#39;</span>
+<span class="go">  - &#39;phy:1&#39;</span>
+</pre></div>
+</div>
+<p>This message explains that <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code> has two physical ports.</p>
+<div class="section" id="configure-spp-nfv-as-l2fwd">
+<h3>3.1.1. Configure spp_nfv as L2fwd<a class="headerlink" href="#configure-spp-nfv-as-l2fwd" title="Permalink to this headline">¶</a></h3>
+<p>Assing the destination of ports with <code class="docutils literal"><span class="pre">patch</span></code> subcommand and
+start forwarding.
+Patch from <code class="docutils literal"><span class="pre">phy:0</span></code> to <code class="docutils literal"><span class="pre">phy:1</span></code> and <code class="docutils literal"><span class="pre">phy:1</span></code> to <code class="docutils literal"><span class="pre">phy:0</span></code>,
+which means it is bi-directional connection.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;patch phy:0 phy:1</span>
+<span class="go">spp &gt; sec 1;patch phy:1 phy:0</span>
+<span class="go">spp &gt; sec 1;forward</span>
+</pre></div>
+</div>
+<p>Confirm that status of <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code> is updated.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;status</span>
+<span class="go">status: running</span>
+<span class="go">ports:</span>
+<span class="go">  - &#39;phy:0 -&gt; phy:1&#39;</span>
+<span class="go">  - &#39;phy:1 -&gt; phy:0&#39;</span>
+</pre></div>
+</div>
+<div class="figure" id="id2">
+<span id="figure-spp-nfv-as-l2fwd"></span><a class="reference internal image-reference" href="../_images/spp_nfv_l2fwd.svg"><img height="380em" src="../_images/spp_nfv_l2fwd.svg" width="380em" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1 </span><span class="caption-text">spp_nfv as l2fwd</span></p>
+</div>
+<p>Stop forwarding and reset patch to clear configuration.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;stop</span>
+<span class="go">spp &gt; sec 1;patch reset</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configure-spp-nfv-for-loopback">
+<h3>3.1.2. Configure spp_nfv for Loopback<a class="headerlink" href="#configure-spp-nfv-for-loopback" title="Permalink to this headline">¶</a></h3>
+<p>Patch <code class="docutils literal"><span class="pre">phy:0</span></code> to <code class="docutils literal"><span class="pre">phy:0</span></code> and <code class="docutils literal"><span class="pre">phy:1</span></code> to <code class="docutils literal"><span class="pre">phy:1</span></code>
+for loopback.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;patch phy:0 phy:0</span>
+<span class="go">spp &gt; sec 1;patch phy:1 phy:1</span>
+<span class="go">spp &gt; sec 1;forward</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="dual-spp-nfv">
+<h2>3.2. Dual spp_nfv<a class="headerlink" href="#dual-spp-nfv" title="Permalink to this headline">¶</a></h2>
+<p>Use case for testing performance of packet forwarding
+with two <code class="docutils literal"><span class="pre">spp_nfv</span></code> on host.
+Throughput is expected to be better than
+<a class="reference internal" href="#single-spp-nfv"><span>Single spp_nfv</span></a>
+use case
+because bi-directional forwarding of single nfv shared with two of
+uni-directional forwarding between dual spp_nfv.</p>
+<p>In this use case, configure two senarios almost similar to
+previous section.</p>
+<ul class="simple">
+<li>Configure Two spp_nfv as L2fwd</li>
+<li>Configure Two spp_nfv for Loopback</li>
+</ul>
+<div class="section" id="configure-two-spp-nfv-as-l2fwd">
+<h3>3.2.1. Configure Two spp_nfv as L2fwd<a class="headerlink" href="#configure-two-spp-nfv-as-l2fwd" title="Permalink to this headline">¶</a></h3>
+<p>Assing the destination of ports with <code class="docutils literal"><span class="pre">patch</span></code> subcommand and
+start forwarding.
+Patch from <code class="docutils literal"><span class="pre">phy:0</span></code> to <code class="docutils literal"><span class="pre">phy:1</span></code> for <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code> and
+from <code class="docutils literal"><span class="pre">phy:1</span></code> to <code class="docutils literal"><span class="pre">phy:0</span></code> for <code class="docutils literal"><span class="pre">sec</span> <span class="pre">2</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;patch phy:0 phy:1</span>
+<span class="go">spp &gt; sec 2;patch phy:1 phy:0</span>
+<span class="go">spp &gt; sec 1;forward</span>
+<span class="go">spp &gt; sec 2;forward</span>
+</pre></div>
+</div>
+<div class="figure" id="id3">
+<span id="figure-spp-two-nfv-as-l2fwd"></span><a class="reference internal image-reference" href="../_images/spp_two_nfv_l2fwd.svg"><img height="420em" src="../_images/spp_two_nfv_l2fwd.svg" width="420em" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Two spp_nfv as l2fwd</span></p>
+</div>
+</div>
+<div class="section" id="configure-two-spp-nfv-for-loopback">
+<h3>3.2.2. Configure two spp_nfv for Loopback<a class="headerlink" href="#configure-two-spp-nfv-for-loopback" title="Permalink to this headline">¶</a></h3>
+<p>Patch <code class="docutils literal"><span class="pre">phy:0</span></code> to <code class="docutils literal"><span class="pre">phy:0</span></code> for <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code> and
+<code class="docutils literal"><span class="pre">phy:1</span></code> to <code class="docutils literal"><span class="pre">phy:1</span></code> for <code class="docutils literal"><span class="pre">sec</span> <span class="pre">2</span></code> for loopback.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;patch phy:0 phy:0</span>
+<span class="go">spp &gt; sec 2;patch phy:1 phy:1</span>
+<span class="go">spp &gt; sec 1;forward</span>
+<span class="go">spp &gt; sec 2;forward</span>
+</pre></div>
+</div>
+<div class="figure" id="id4">
+<span id="figure-spp-two-nfv-loopback"></span><a class="reference internal image-reference" href="../_images/spp_two_nfv_loopback.svg"><img height="420em" src="../_images/spp_two_nfv_loopback.svg" width="420em" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Two spp_nfv for loopback</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="dual-spp-nfv-with-ring-pmd">
+<h2>3.3. Dual spp_nfv with Ring PMD<a class="headerlink" href="#dual-spp-nfv-with-ring-pmd" title="Permalink to this headline">¶</a></h2>
+<p>In this use case, configure two senarios by using ring PMD.</p>
+<ul class="simple">
+<li>Uni-Directional L2fwd</li>
+<li>Bi-Directional L2fwd</li>
+</ul>
+<div class="section" id="ring-pmd">
+<h3>3.3.1. Ring PMD<a class="headerlink" href="#ring-pmd" title="Permalink to this headline">¶</a></h3>
+<p>Ring PMD is an interface for communicating between secondaries on host.
+The maximum number of ring PMDs is defined as <code class="docutils literal"><span class="pre">-n</span></code>  option of
+<code class="docutils literal"><span class="pre">spp_primary</span></code> and ring ID is started from 0.</p>
+<p>Ring PMD is added by using <code class="docutils literal"><span class="pre">add</span></code> subcommand.
+All of ring PMDs is showed with <code class="docutils literal"><span class="pre">status</span></code> subcommand.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;add ring 0</span>
+<span class="go">recv:6:{addring0}</span>
+<span class="go">spp &gt; sec 1;status</span>
+<span class="go">status: idling</span>
+<span class="go">ports:</span>
+<span class="go">  - &#39;phy:0&#39;</span>
+<span class="go">  - &#39;phy:1&#39;</span>
+<span class="go">  - &#39;ring:0&#39;</span>
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal"><span class="pre">ring:0</span></code> is added to <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code>.
+You can delete it with <code class="docutils literal"><span class="pre">del</span></code> command if you do not need to
+use it anymore.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;del ring 0</span>
+<span class="go">recv:6:{delring0}</span>
+<span class="go">spp &gt; sec 1;status</span>
+<span class="go">status: idling</span>
+<span class="go">ports:</span>
+<span class="go">  - &#39;phy:0&#39;</span>
+<span class="go">  - &#39;phy:1&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="uni-directional-l2fwd">
+<h3>3.3.2. Uni-Directional L2fwd<a class="headerlink" href="#uni-directional-l2fwd" title="Permalink to this headline">¶</a></h3>
+<p>Add a ring PMD and connect two <code class="docutils literal"><span class="pre">spp_nvf</span></code> processes.
+To configure network path, add <code class="docutils literal"><span class="pre">ring</span> <span class="pre">0</span></code> to <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code> and <code class="docutils literal"><span class="pre">sec</span> <span class="pre">2</span></code>.
+Then, connect it with <code class="docutils literal"><span class="pre">patch</span></code> subcommand.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;add ring 0</span>
+<span class="go">spp &gt; sec 2;add ring 0</span>
+<span class="go">spp &gt; sec 1;patch phy:0 ring:0</span>
+<span class="go">spp &gt; sec 2;patch ring:0 phy:1</span>
+<span class="go">spp &gt; sec 1;forward</span>
+<span class="go">spp &gt; sec 2;forward</span>
+</pre></div>
+</div>
+<div class="figure" id="id5">
+<span id="figure-spp-uni-directional-l2fwd"></span><a class="reference internal image-reference" href="../_images/spp_unidir_l2fwd.svg"><img height="460em" src="../_images/spp_unidir_l2fwd.svg" width="460em" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.4 </span><span class="caption-text">Uni-Directional l2fwd</span></p>
+</div>
+</div>
+<div class="section" id="bi-directional-l2fwd">
+<h3>3.3.3. Bi-Directional L2fwd<a class="headerlink" href="#bi-directional-l2fwd" title="Permalink to this headline">¶</a></h3>
+<p>Add two ring PMDs to two <code class="docutils literal"><span class="pre">spp_nvf</span></code> processes.
+For bi-directional forwarding,
+patch <code class="docutils literal"><span class="pre">ring</span> <span class="pre">0</span></code> for a path from <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code> to <code class="docutils literal"><span class="pre">sec</span> <span class="pre">2</span></code>
+and <code class="docutils literal"><span class="pre">ring</span> <span class="pre">1</span></code> for another path from <code class="docutils literal"><span class="pre">sec</span> <span class="pre">2</span></code> to <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code>.</p>
+<p>First, add <code class="docutils literal"><span class="pre">ring</span> <span class="pre">0</span></code> and <code class="docutils literal"><span class="pre">ring</span> <span class="pre">1</span></code> to <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;add ring 0</span>
+<span class="go">spp &gt; sec 1;add ring 1</span>
+<span class="go">status: idling</span>
+<span class="go">ports:</span>
+<span class="go">  - &#39;phy:0&#39;</span>
+<span class="go">  - &#39;phy:1&#39;</span>
+<span class="go">  - &#39;ring:0&#39;</span>
+<span class="go">  - &#39;ring:1&#39;</span>
+</pre></div>
+</div>
+<p>Then, add <code class="docutils literal"><span class="pre">ring</span> <span class="pre">0</span></code> and <code class="docutils literal"><span class="pre">ring</span> <span class="pre">1</span></code> to <code class="docutils literal"><span class="pre">sec</span> <span class="pre">2</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 2;add ring 0</span>
+<span class="go">spp &gt; sec 2;add ring 1</span>
+<span class="go">status: idling</span>
+<span class="go">ports:</span>
+<span class="go">  - &#39;phy:0&#39;</span>
+<span class="go">  - &#39;phy:1&#39;</span>
+<span class="go">  - &#39;ring:0&#39;</span>
+<span class="go">  - &#39;ring:1&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;patch phy:0 ring:0</span>
+<span class="go">spp &gt; sec 1;patch ring:1 phy:0</span>
+<span class="go">spp &gt; sec 2;patch phy:1 ring:1</span>
+<span class="go">spp &gt; sec 2;patch ring:0 phy:1</span>
+<span class="go">spp &gt; sec 1;forward</span>
+<span class="go">spp &gt; sec 2;forward</span>
+</pre></div>
+</div>
+<div class="figure" id="id6">
+<span id="figure-spp-bi-directional-l2fwd"></span><a class="reference internal image-reference" href="../_images/spp_bidir_l2fwd.svg"><img height="460em" src="../_images/spp_bidir_l2fwd.svg" width="460em" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.5 </span><span class="caption-text">Bi-Directional l2fwd</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="single-spp-nfv-with-vhost-pmd">
+<h2>3.4. Single spp_nfv with Vhost PMD<a class="headerlink" href="#single-spp-nfv-with-vhost-pmd" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="vhost-pmd">
+<h3>3.4.1. Vhost PMD<a class="headerlink" href="#vhost-pmd" title="Permalink to this headline">¶</a></h3>
+<p>Vhost PMD is an interface for communicating between on hsot and guest VM.
+As described in
+<a class="reference internal" href="howto_use.html"><em>How to Use</em></a>,
+vhost must be created by <code class="docutils literal"><span class="pre">add</span></code> subcommand before the VM is launched.</p>
+</div>
+<div class="section" id="setup-vhost-pmd">
+<h3>3.4.2. Setup Vhost PMD<a class="headerlink" href="#setup-vhost-pmd" title="Permalink to this headline">¶</a></h3>
+<p>In this use case, add <code class="docutils literal"><span class="pre">vhost</span> <span class="pre">0</span></code> to <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code> for communicating
+with the VM.
+First, check if <code class="docutils literal"><span class="pre">/tmp/sock0</span></code> is already exist.
+You have to remove it already exist to avoid failure of socket file
+creation.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> ls /tmp <span class="p">|</span> grep sock
+<span class="go">sock0 ...</span>
+
+<span class="gp">#</span> remove it <span class="k">if</span> exist
+<span class="gp">$</span> rm /tmp/sock0
+</pre></div>
+</div>
+<p>Create <code class="docutils literal"><span class="pre">/tmp/sock0</span></code> from <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;add vhost 0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="uni-directional-l2fwd-with-vhost-pmd">
+<h3>3.4.3. Uni-Directional L2fwd with Vhost PMD<a class="headerlink" href="#uni-directional-l2fwd-with-vhost-pmd" title="Permalink to this headline">¶</a></h3>
+<p>Start a VM with vhost interface as described in
+<a class="reference internal" href="howto_use.html"><em>How to Use</em></a>
+and launch <code class="docutils literal"><span class="pre">spp_vm</span></code> with secondary ID 2.
+You find <code class="docutils literal"><span class="pre">sec</span> <span class="pre">2</span></code> from controller after launched.</p>
+<p>Patch <code class="docutils literal"><span class="pre">phy:0</span></code> and <code class="docutils literal"><span class="pre">phy:1</span></code> to <code class="docutils literal"><span class="pre">vhost:0</span></code> with <code class="docutils literal"><span class="pre">sec</span> <span class="pre">1</span></code>
+running on host.
+Inside VM, configure loopback by patching <code class="docutils literal"><span class="pre">phy:0</span></code> and <code class="docutils literal"><span class="pre">phy:0</span></code>
+with <code class="docutils literal"><span class="pre">sec</span> <span class="pre">2</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;patch phy:0 vhost:0</span>
+<span class="go">spp &gt; sec 1;patch vhost:0 phy:1</span>
+<span class="go">spp &gt; sec 2;patch phy:0 phy:0</span>
+<span class="go">spp &gt; sec 1;forward</span>
+<span class="go">spp &gt; sec 2;forward</span>
+</pre></div>
+</div>
+<div class="figure" id="id7">
+<span id="figure-spp-uni-directional-l2fwd-vhost"></span><a class="reference internal image-reference" href="../_images/spp_unidir_l2fwd_vhost.svg"><img height="460em" src="../_images/spp_unidir_l2fwd_vhost.svg" width="460em" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.6 </span><span class="caption-text">Uni-Directional l2fwd with vhost</span></p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="performance_opt.html" class="btn btn-neutral float-right" title="4. Performance Optimization" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="howto_use.html" class="btn btn-neutral" title="2. How to Use" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

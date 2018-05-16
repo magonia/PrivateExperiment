@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Getting Started &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../index.html"/>
+        <link rel="up" title="Setup Guide" href="index.html"/>
+        <link rel="next" title="2. How to Use" href="howto_use.html"/>
+        <link rel="prev" title="Setup Guide" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Setup Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">1. Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">1.1. Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reserving-hugepages">1.1.1. Reserving Hugepages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mount-hugepages">1.1.2. Mount hugepages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#install-dpdk-and-spp">1.2. Install DPDK and SPP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binding-network-ports-to-dpdk">1.3. Binding Network Ports to DPDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#uio-drivers">1.3.1. UIO Drivers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#binding-network-ports">1.3.2. Binding Network Ports</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#run-dpdk-sample-application">1.4. Run DPDK Sample Application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="howto_use.html">2. How to Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use_cases.html">3. Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_opt.html">4. Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/index.html">SPP Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spp_vf/index.html">SPP VF</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Setup Guide</a> &raquo;</li>
+      
+    <li>1. Getting Started</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/setup/getting_started.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="getting-started"></span><div class="section" id="id1">
+<h1>1. Getting Started<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setup">
+<h2>1.1. Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="reserving-hugepages">
+<h3>1.1.1. Reserving Hugepages<a class="headerlink" href="#reserving-hugepages" title="Permalink to this headline">¶</a></h3>
+<p>Hugepages must be enabled for running DPDK with high performance.
+Hugepage support is required to reserve large amount size of pages,
+2MB or 1GB per page, to less TLB (Translation Lookaside Buffers) and
+to reduce cache miss.
+Less TLB means that it reduce the time for translating virtual address
+to physical.</p>
+<p>Hugepage reservation might be different for 2MB or 1GB.</p>
+<p>For 1GB page, hugepage setting must be activated while booting system.
+It must be defined in boot loader configuration, usually is
+<code class="docutils literal"><span class="pre">/etc/default/grub</span></code>.
+Add an entry to define pagesize and the number of pages.
+Here is an example. `` hugepagesz`` is for the size and <code class="docutils literal"><span class="pre">hugepages</span></code>
+is for the number of pages.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">GRUB_CMDLINE_LINUX=&quot;default_hugepagesz=1G hugepagesz=1G hugepages=8&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>1GB hugepages might not be supported in your machine. It depends on
+that CPUs support 1GB pages or not. You can check it by referring
+<code class="docutils literal"><span class="pre">/proc/cpuinfo</span></code>. If it is supported, you can find <code class="docutils literal"><span class="pre">pdpe1gb</span></code> in
+the <code class="docutils literal"><span class="pre">flags</span></code> attribute.</p>
+<div class="last highlight-console"><div class="highlight"><pre><span class="gp">$</span> cat /proc/cpuinfo <span class="p">|</span> pdpe1gb
+</pre></div>
+</div>
+</div>
+<p>For 2MB page, you can activate hugepages while booting or at anytime
+after system is booted.
+Define hugepages setting in <code class="docutils literal"><span class="pre">/etc/default/grub</span></code> to activate it while
+booting, or overwrite the number of 2MB hugepages as following.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">echo</span> <span class="m">1024</span> &gt; /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+</pre></div>
+</div>
+<p>In this case, 1024 pages of 2MB (totally 2048 MB) are reserved.</p>
+</div>
+<div class="section" id="mount-hugepages">
+<h3>1.1.2. Mount hugepages<a class="headerlink" href="#mount-hugepages" title="Permalink to this headline">¶</a></h3>
+<p>Make the memory available for using hugepages from DPDK.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">mkdir /mnt/huge</span>
+<span class="go">mount -t hugetlbfs nodev /mnt/huge</span>
+</pre></div>
+</div>
+<p>It is also available while booting by adding a configuration of mount
+point in <code class="docutils literal"><span class="pre">/etc/fstab</span></code>, or after booted.</p>
+<p>The mount point for 2MB or 1GB can be made permanent accross reboot.
+For 2MB, it is no need to declare the size of hugepages explicity.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">nodev /mnt/huge hugetlbfs defaults 0 0</span>
+</pre></div>
+</div>
+<p>For 1GB, the size of hugepage must be specified.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">nodev /mnt/huge_1GB hugetlbfs pagesize=1GB 0 0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="install-dpdk-and-spp">
+<h2>1.2. Install DPDK and SPP<a class="headerlink" href="#install-dpdk-and-spp" title="Permalink to this headline">¶</a></h2>
+<p>Before using SPP, you need to install DPDK.
+In this document, briefly describ how to install and setup DPDK.
+Refer to <a class="reference external" href="https://dpdk.org/doc/guides/">DPDK documentation</a> for more details.
+For Linux, see <a class="reference external" href="http://www.dpdk.org/doc/guides/linux_gsg/index.html">Getting Started Guide for Linux</a> .</p>
+<p>First, download and compile DPDK in any directory.
+Compiling DPDK takes a few minutes.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> /path/to/any
+<span class="gp">$</span> git clone http://dpdk.org/git/dpdk
+<span class="gp">$</span> <span class="nb">cd</span> dpdk
+<span class="gp">$</span> <span class="nb">export</span> <span class="nv">RTE_SDK</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
+<span class="gp">$</span> <span class="nb">export</span> <span class="nv">RTE_TARGET</span><span class="o">=</span>x86_64-native-linuxapp-gcc  <span class="c1"># depends on your env</span>
+<span class="gp">$</span> make install <span class="nv">T</span><span class="o">=</span>$RTE_TARGET
+</pre></div>
+</div>
+<p>Then, download and compile SPP in any directory.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> /path/to/any
+<span class="gp">$</span> git clone http://dpdk.org/git/apps/spp
+<span class="gp">$</span> <span class="nb">cd</span> spp
+<span class="gp">$</span> make  <span class="c1"># Confirm that $RTE_SDK and $RTE_TARGET are set</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binding-network-ports-to-dpdk">
+<h2>1.3. Binding Network Ports to DPDK<a class="headerlink" href="#binding-network-ports-to-dpdk" title="Permalink to this headline">¶</a></h2>
+<p>Network ports must be bound to DPDK with a UIO (Userspace IO) driver.
+UIO driver is for mapping device memory to userspace and registering
+interrupts.</p>
+<div class="section" id="uio-drivers">
+<h3>1.3.1. UIO Drivers<a class="headerlink" href="#uio-drivers" title="Permalink to this headline">¶</a></h3>
+<p>You usually use the standard <code class="docutils literal"><span class="pre">uio_pci_generic</span></code> for many use cases
+or <code class="docutils literal"><span class="pre">vfio-pci</span></code> for more robust and secure cases.
+Both of drivers are included by default in modern Linux kernel.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> Activate uio_pci_generic
+<span class="gp">$</span> sudo modprobe uio_pci_generic
+
+<span class="gp">#</span> or vfio-pci
+<span class="gp">$</span> sudo modprobe vfio-pci
+</pre></div>
+</div>
+<p>You can also use kmod included in DPDK instead of <code class="docutils literal"><span class="pre">uio_pci_generic</span></code>
+or <code class="docutils literal"><span class="pre">vfio-pci</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">sudo modprobe uio</span>
+<span class="go">sudo insmod kmod/igb_uio.ko</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binding-network-ports">
+<h3>1.3.2. Binding Network Ports<a class="headerlink" href="#binding-network-ports" title="Permalink to this headline">¶</a></h3>
+<p>Once UIO driver is activated, bind network ports with the driver.
+DPDK provides <code class="docutils literal"><span class="pre">usertools/dpdk-devbind.py</span></code> for managing devices.</p>
+<p>Find ports for binding to DPDK by running the tool with <code class="docutils literal"><span class="pre">-s</span></code> option.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> $RTE_SDK/usertools/dpdk-devbind.py --status
+
+<span class="go">Network devices using DPDK-compatible driver</span>
+<span class="go">============================================</span>
+<span class="go">&lt;none&gt;</span>
+
+<span class="go">Network devices using kernel driver</span>
+<span class="go">===================================</span>
+<span class="go">0000:29:00.0 &#39;82571EB Gigabit Ethernet Controller (Copper) 10bc&#39; if=enp41s0f0 drv=e1000e unused=</span>
+<span class="go">0000:29:00.1 &#39;82571EB Gigabit Ethernet Controller (Copper) 10bc&#39; if=enp41s0f1 drv=e1000e unused=</span>
+<span class="go">0000:2a:00.0 &#39;82571EB Gigabit Ethernet Controller (Copper) 10bc&#39; if=enp42s0f0 drv=e1000e unused=</span>
+<span class="go">0000:2a:00.1 &#39;82571EB Gigabit Ethernet Controller (Copper) 10bc&#39; if=enp42s0f1 drv=e1000e unused=</span>
+
+<span class="go">Other Network devices</span>
+<span class="go">=====================</span>
+<span class="go">&lt;none&gt;</span>
+<span class="go">....</span>
+</pre></div>
+</div>
+<p>You can find network ports are bound to kernel driver and not to DPDK.
+To bind a port to DPDK, run <code class="docutils literal"><span class="pre">dpdk-devbind.py</span></code> with specifying a driver
+and a device ID.
+Device ID is a PCI address of the device or more friendly style like
+<code class="docutils literal"><span class="pre">eth0</span></code> found by <code class="docutils literal"><span class="pre">ifconfig</span></code> or <code class="docutils literal"><span class="pre">ip</span></code> command..</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">#</span> Bind a port with 2a:00.0 <span class="o">(</span>PCI address<span class="o">)</span>
+<span class="go">./usertools/dpdk-devbind.py --bind=uio_pci_generic 2a:00.0</span>
+
+<span class="gp">#</span> or eth0
+<span class="go">./usertools/dpdk-devbind.py --bind=uio_pci_generic eth0</span>
+</pre></div>
+</div>
+<p>After binding two ports, you can find it is under the DPDK driver and
+cannot find it by using <code class="docutils literal"><span class="pre">ifconfig</span></code> or <code class="docutils literal"><span class="pre">ip</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> $RTE_SDK/usertools/dpdk-devbind.py -s
+
+<span class="go">Network devices using DPDK-compatible driver</span>
+<span class="go">============================================</span>
+<span class="go">0000:2a:00.0 &#39;82571EB Gigabit Ethernet Controller (Copper) 10bc&#39; drv=uio_pci_generic unused=vfio-pci</span>
+<span class="go">0000:2a:00.1 &#39;82571EB Gigabit Ethernet Controller (Copper) 10bc&#39; drv=uio_pci_generic unused=vfio-pci</span>
+
+<span class="go">Network devices using kernel driver</span>
+<span class="go">===================================</span>
+<span class="go">0000:29:00.0 &#39;82571EB Gigabit Ethernet Controller (Copper) 10bc&#39; if=enp41s0f0 drv=e1000e unused=vfio-pci,uio_pci_generic</span>
+<span class="go">0000:29:00.1 &#39;82571EB Gigabit Ethernet Controller (Copper) 10bc&#39; if=enp41s0f1 drv=e1000e unused=vfio-pci,uio_pci_generic</span>
+
+<span class="go">Other Network devices</span>
+<span class="go">=====================</span>
+<span class="go">&lt;none&gt;</span>
+<span class="go">....</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-dpdk-sample-application">
+<h2>1.4. Run DPDK Sample Application<a class="headerlink" href="#run-dpdk-sample-application" title="Permalink to this headline">¶</a></h2>
+<p>You had better to run DPDK sample application before SPP
+as checking DPDK is setup properly.</p>
+<p>Try <code class="docutils literal"><span class="pre">l2fwd</span></code> as an example.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> $RTE_SDK/examples/l2fwd
+<span class="gp">$</span> make
+<span class="go">  CC main.o</span>
+<span class="go">  LD l2fwd</span>
+<span class="go">  INSTALL-APP l2fwd</span>
+<span class="go">  INSTALL-MAP l2fwd.map</span>
+</pre></div>
+</div>
+<p>In this case, run this application with two options.</p>
+<blockquote>
+<div><ul class="simple">
+<li>-c: core mask</li>
+<li>-p: port mask</li>
+</ul>
+</div></blockquote>
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo ./build/app/l2fwd <span class="se">\</span>
+<span class="go">  -c 0x03 \</span>
+<span class="go">  -- -p 0x3</span>
+</pre></div>
+</div>
+<p>It must be separated with <code class="docutils literal"><span class="pre">--</span></code> to specify which option is
+for EAL or application.
+Refer to <a class="reference external" href="https://dpdk.org/doc/guides/sample_app_ug/l2_forward_real_virtual.html">L2 Forwarding Sample Application</a>
+for more details.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="howto_use.html" class="btn btn-neutral float-right" title="2. How to Use" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Setup Guide" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Secondary Commands &mdash; Soft Patch Panel v18.02 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Soft Patch Panel v18.02 documentation" href="../index.html"/>
+        <link rel="up" title="SPP Commands" href="index.html"/>
+        <link rel="next" title="3. Common Commands" href="common.html"/>
+        <link rel="prev" title="1. Primary Commands" href="primary.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soft Patch Panel
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v18.02
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Soft Patch Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Setup Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SPP Commands</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="primary.html">1. Primary Commands</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">2. Secondary Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#status">2.1. status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add">2.2. add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#patch">2.3. patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#forward">2.4. forward</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stop">2.5. stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#del">2.6. del</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exit">2.7. exit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">3. Common Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimental.html">4. Experimental Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spp_vf/index.html">SPP VF</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Soft Patch Panel</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">SPP Commands</a> &raquo;</li>
+      
+    <li>2. Secondary Commands</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/commands/secondary.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="secondary-commands">
+<h1>2. Secondary Commands<a class="headerlink" href="#secondary-commands" title="Permalink to this headline">¶</a></h1>
+<p>Each of secondary processes is managed with <code class="docutils literal"><span class="pre">sec</span></code> command.
+It is for sending sub commands to secondary with specific ID called
+secondary ID.</p>
+<p><code class="docutils literal"><span class="pre">sec</span></code> command takes an secondary ID and a sub command. They must be
+separated with delimiter <code class="docutils literal"><span class="pre">;</span></code>.
+Some of sub commands take additional arguments for speicfying resource
+owned by secondary process.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec [SEC_ID];[SUB_CMD]</span>
+</pre></div>
+</div>
+<div class="section" id="status">
+<h2>2.1. status<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h2>
+<p>Show running status and resources.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;status</span>
+<span class="go">status: idling</span>
+<span class="go">ports:</span>
+<span class="go">  - &#39;phy:0&#39;</span>
+<span class="go">  - &#39;phy:1&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add">
+<h2>2.2. add<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h2>
+<p>Add a PMD to the secondary with resource ID.</p>
+<p>Adding ring 0 by</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp&gt; sec 1;add ring 0</span>
+</pre></div>
+</div>
+<p>Or adding vhost 0 by</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp&gt; sec 1;add vhost 0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="patch">
+<h2>2.3. patch<a class="headerlink" href="#patch" title="Permalink to this headline">¶</a></h2>
+<p>Create a path between two ports, source and destination ports.
+This command just creates path and does not start forwarding.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;patch phy:0 ring:0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="forward">
+<h2>2.4. forward<a class="headerlink" href="#forward" title="Permalink to this headline">¶</a></h2>
+<p>Start forwarding.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;forward</span>
+</pre></div>
+</div>
+<p>Running status is changed from <code class="docutils literal"><span class="pre">idling</span></code> to <code class="docutils literal"><span class="pre">running</span></code> by
+executing it.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;status</span>
+<span class="go">status: running</span>
+<span class="go">ports:</span>
+<span class="go">  - &#39;phy:0&#39;</span>
+<span class="go">  - &#39;phy:1&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stop">
+<h2>2.5. stop<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h2>
+<p>Stop forwarding.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;stop</span>
+</pre></div>
+</div>
+<p>Running status is changed from <code class="docutils literal"><span class="pre">running</span></code> to <code class="docutils literal"><span class="pre">idling</span></code> by
+executing it.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp &gt; sec 1;status</span>
+<span class="go">status: idling</span>
+<span class="go">ports:</span>
+<span class="go">  - &#39;phy:0&#39;</span>
+<span class="go">  - &#39;phy:1&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="del">
+<h2>2.6. del<a class="headerlink" href="#del" title="Permalink to this headline">¶</a></h2>
+<p>Delete PMD added by <code class="docutils literal"><span class="pre">add</span></code> subcommand from the secondary.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp&gt; sec 1;del ring 0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exit">
+<h2>2.7. exit<a class="headerlink" href="#exit" title="Permalink to this headline">¶</a></h2>
+<p>Terminate the secondary. For terminating all secondaries, use <code class="docutils literal"><span class="pre">bye</span> <span class="pre">sec</span></code>
+command instead of it.</p>
+<div class="highlight-console"><div class="highlight"><pre><span class="go">spp&gt; sec 1;exit</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="common.html" class="btn btn-neutral float-right" title="3. Common Commands" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="primary.html" class="btn btn-neutral" title="1. Primary Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yasufumi Ogawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v18.02',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
